@@ -1,12 +1,7 @@
-#app.py
+# app.py
 from flask import Flask, current_app
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from flask import Flask
-# from flask_restplus import Api, Resource
-
-# app = Flask(__name__)
-# api = Api(app, version='1.0', title='My-Duka', description='A sample API')
 
 # Create the SQLAlchemy and Migrate objects here, but don't bind them to an app yet.
 # They will be bound to the Flask app in the create_app function.
@@ -37,6 +32,10 @@ def create_app():
     app.register_blueprint(inventory.product_router)
     app.register_blueprint(order.order_bp)
     app.register_blueprint(user.user_bp)
+
+    @app.route('/')
+    def home():
+        return "Welcome to My Duka App!"
 
     return app
 
