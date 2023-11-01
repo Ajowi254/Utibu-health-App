@@ -9,9 +9,9 @@ from controllers.admin.category.addCategory import add_category
 #from controllers.admin.category.category import category
 from controllers.admin.category.deleteCategory import delete_category
 from controllers.admin.category.editCategory import edit_category
-from controllers.admin.product.addProduct import add_product
+from controllers.admin.product.addproduct import add_product
 from controllers.admin.product.product import products
-from controllers.admin.product.deleteProduct import delete_product
+from controllers.admin.product.deleteproduct import delete_product
 from controllers.admin.product.create_product import create_product
 
 brand_router = Blueprint('brand', __name__)

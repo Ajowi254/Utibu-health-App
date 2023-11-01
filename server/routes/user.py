@@ -1,9 +1,9 @@
 #user.py
 from flask import Flask, jsonify, request, Blueprint
-from controllers.admin.user.switchToUser import switch_to_user
+from controllers.admin.user.switchtouser import switch_to_user
 from controllers.admin.user.users import user
 from controllers.auth.forgotPassword import forgot_password
-from controllers.auth.Login import login
+from controllers.auth.login import login
 from controllers.auth.password_reset_page import password_reset_page
 from controllers.auth.register import register
 from controllers.user.order.profileUpdate.profileDetail import profile_detail
