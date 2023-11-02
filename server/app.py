@@ -3,6 +3,7 @@ from flask import Flask, current_app
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
+
 # Create the SQLAlchemy and Migrate objects here, but don't bind them to an app yet.
 # They will be bound to the Flask app in the create_app function.
 db = SQLAlchemy()
@@ -17,6 +18,7 @@ def create_app():
     # Bind the SQLAlchemy and Migrate objects to the Flask app.
     db.init_app(app)
     migrate.init_app(app, db)
+
 
     # Import your models and routes here
     from models.userModel import UserDetails
