@@ -1,5 +1,3 @@
-from flask_sqlalchemy import SQLAlchemy
+from models import db
 
-SQLALCHEMY_DATABASE_URI = 'sqlite:///site.db' 
 
-from app import db

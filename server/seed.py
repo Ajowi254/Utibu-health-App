@@ -1,13 +1,9 @@
-#seed.py
-# from app import app, db
-from app import create_app, db
-from models.userModel import UserDetails
 from models.orderModal import OrderDetails
 from models.category import CategoryDetails
 from models.brand import BrandDetails
 from models.product import ProductDetails
 from datetime import datetime
-from sqlalchemy.orm import Session
+
 
 
 created_at_string = '2023-10-30 18:53:11.151699'
