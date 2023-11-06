@@ -50,7 +50,7 @@ function Login() {
     onSubmit: async (values) => {
       try {
         setloading(true)
-        let value = await axios.post(`${env.api}/user/login`, values);
+        let value = await axios.post(`${env.api}/login`, values);
         const { data } = value;
         const { isAdmin, message, name, statusCode, token, user } = data;
         if (statusCode === 201) {
@@ -167,18 +167,6 @@ function Login() {
         </form>
         <ToastContainer />
       </div>
-   
-      {/* <div className='mt-5  a card text-center text-dark fw-bold bg-transparent '>
-       
-       <span className="text-uppercase">credentials for Admin : - </span>
-        <span>Email : kirubam8878@gmail.com</span>
-        <sapn>Password : Admin@1234</sapn>
-        <span className="text-uppercase">credentials for User : -</span>
-        <span>Email : kirubaharan8878m@gmail.com</span>
-        <sapn>Password : User@1234</sapn>
-     
-      
-      </div> */}
       <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Header closeButton>
           <Modal.Title><h5 className="ttt">Login Successful..</h5> </Modal.Title>

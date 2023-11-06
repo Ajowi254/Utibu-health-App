@@ -9,7 +9,7 @@ let AdminContext = createContext();
 
 export const AdminProvider = ({ children }) => {
     let navigate = useNavigate();
-    const [username, setUsername] = useState("kiruba");
+    const [username, setUsername] = useState("user");
     const [open, setOpen] = useState(false);
     const [brand, setBrand] = useState([]);
     const [category, setCategory] = useState([]);

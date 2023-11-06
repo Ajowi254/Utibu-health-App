@@ -68,7 +68,7 @@ function Register() {
       try {
         delete values.conformPassword;
         setloading(true)
-        let user = await axios.post(`${env.api}/user/register`, values);
+        let user = await axios.post(`${env.api}/register`, values);
         const { data } = user;
         const { message, statusCode } = data;
         if (statusCode === 201) {
@@ -185,7 +185,7 @@ function Register() {
           <div className="mt-3 new_user">
             <span>
               Already have an account?{" "}
-              <span className="sign_color" onClick={() => navigate("/")}>
+              <span className="sign_color" onClick={() => navigate("/login")}>
                 Sign in now
               </span>
             </span>
