@@ -15,7 +15,7 @@ function Navbar() {
   return (
     <nav>
       <div className='nav_left'>
-        <h5>Retail Shop App</h5>
+        <h5>M Duka</h5>
       </div>
       <h5>
         Admin

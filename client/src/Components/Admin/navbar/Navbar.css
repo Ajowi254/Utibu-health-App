@@ -4,8 +4,8 @@
 nav{
     display: flex;
     align-items: center;
-    background-color:#017AFF;
-    color: white;
+    background-color:rgba(121, 229, 214, 0.812);
+    color: rgb(21, 11, 11);
     font-family: 'Poppins', sans-serif;
     top: 0;
     position: sticky;

@@ -1,4 +1,3 @@
-//login.js
 import React, { useState, useContext } from "react";
 import "./Login.css";
 import { useFormik } from "formik";
@@ -38,8 +37,7 @@ function Login() {
 
       if (values.email.length === 0) {
         errors.email = "Enter your email address";
-      } else if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(values.email))
-      {
+      } else if (values.email.search(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/)) {
         errors.email = "Please provide a valid email address";
       }
       if (values.password.length === 0) {
@@ -57,12 +55,12 @@ function Login() {
         const { isAdmin, message, name, statusCode, token, user } = data;
         if (statusCode === 201) {
 
-          //setloading(false)
-          //window.localStorage.setItem("token", token);
-          //window.localStorage.setItem("name", name);
-          //window.localStorage.setItem("isAdmin", isAdmin);
-          //window.localStorage.setItem("userId", user._id);
-          //toast.success(message);
+          setloading(false)
+          window.localStorage.setItem("token", token);
+          window.localStorage.setItem("name", name);
+          window.localStorage.setItem("isAdmin", isAdmin);
+          window.localStorage.setItem("userId", user._id);
+          toast.success(message);
 
           setTimeout(() => {
             if (isAdmin === "admin") {
@@ -170,7 +168,7 @@ function Login() {
         <ToastContainer />
       </div>
    
-      <div className='mt-5  a card text-center text-dark fw-bold bg-transparent '>
+      {/* <div className='mt-5  a card text-center text-dark fw-bold bg-transparent '>
        
        <span className="text-uppercase">credentials for Admin : - </span>
         <span>Email : kirubam8878@gmail.com</span>
@@ -180,7 +178,7 @@ function Login() {
         <sapn>Password : User@1234</sapn>
      
       
-      </div>
+      </div> */}
       <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Header closeButton>
           <Modal.Title><h5 className="ttt">Login Successful..</h5> </Modal.Title>

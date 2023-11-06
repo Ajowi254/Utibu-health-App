@@ -1,4 +1,3 @@
-//AdminContext.js
 import axios from "axios";
 import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -6,22 +5,23 @@ import { env } from "../../config";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-//
-const AdminContext = createContext();
+let AdminContext = createContext();
 
 export const AdminProvider = ({ children }) => {
-    const navigate = useNavigate();
-    const [admin, setAdmin] = useState(null);
+    let navigate = useNavigate();
+    const [username, setUsername] = useState("kiruba");
+    const [open, setOpen] = useState(false);
     const [brand, setBrand] = useState([]);
     const [category, setCategory] = useState([]);
     const [products, setProducts] = useState([]);
     const [dashboardProduct, setDashboardProduct] = useState([]);
-    const [dashboardOverview, setDashboardOverview] = useState(null);
-    const [dashboardBarChart, setDashboardBarChart] = useState(null);
-    const [user, setUser] = useState(null);
+    const [dashboardOverview, setDashboardOverview] = useState({});
+    const [dashboardBarChart, setDashboardBarChart] = useState([])
+    const [user, setUser] = useState([]);
     const [order, setOrder] = useState([]);
 
-  const API_URL = "http://localhost:5000";
+
+
 
     useEffect(() => {
         getBrand();
@@ -29,10 +29,6 @@ export const AdminProvider = ({ children }) => {
 
     useEffect(() => {
         getCategory()
-    }, []);
-
-    useEffect(() => {
-        checkSession()
     }, []);
 
     useEffect(() => {
@@ -56,6 +52,7 @@ export const AdminProvider = ({ children }) => {
         getDashboardOverview()
     }, [products]);
 
+
     useEffect(() => {
         getDashboardBarChart(new Date().getFullYear())
     }, []);
@@ -64,54 +61,10 @@ export const AdminProvider = ({ children }) => {
         getUser()
     }, []);
 
+
     useEffect(() => {
         getOrder()
     }, []);
-
-    const checkSession = async () => {
-        try {
-          const response = await axios.get(`${API_URL}/check-session`);
-          if (response.data.isAdmin) {
-            setAdmin(response.data);
-            navigate("/admin-dashboard");
-          } else if (response.data.user) {
-            setUser(response.data);
-            navigate("/user-dashboard");
-          } else {
-            navigate("/login");
-          }
-        } catch (error) {
-          console.error(error);
-          navigate("/login");
-        }
-      };
-      const login = async (credentials) => {
-        try {
-          const response = await axios.post(`${API_URL}/login`, credentials);
-          if (response.data.isAdmin) {
-            setAdmin(response.data);
-            navigate("/admin-dashboard");
-          } else {
-            setUser(response.data);
-            navigate("/user-dashboard");
-          }
-        } catch (error) {
-          console.error(error);
-          toast.error("Invalid credentials. Please try again.");
-        }
-      };
-      
-      const logout = async () => {
-        try {
-          await axios.post(`${API_URL}/logout`);
-          setUser(null);
-          setAdmin(null);
-          navigate("/login");
-        } catch (error) {
-          console.error(error);
-        }
-      };
-      
 
     const getBrand = async (query) => {
         try {
@@ -372,10 +325,9 @@ export const AdminProvider = ({ children }) => {
     };
     return (
         <AdminContext.Provider value={{
-            admin, setAdmin, brand, getBrand, addBrand, editBrand, deleteBrand, category, addCategory, editCategory, deleteCategory,
+            username, setUsername, brand, open, setOpen, getBrand, addBrand, editBrand, deleteBrand, category, addCategory, editCategory, deleteCategory,
             products, getproducts, addProduct, editProduct, deleteProduct, dashboardProduct, dashboardOverview, getCategory, user, getUser, order,
-            getDashboardProduct, getDashboardOverview,checkSession, dashboardBarChart, getDashboardBarChart, getOrder, login,
-            logout
+            getDashboardProduct, getDashboardOverview, dashboardBarChart, getDashboardBarChart, getOrder
         }}>
             {children}
         </AdminContext.Provider>
@@ -383,4 +335,3 @@ export const AdminProvider = ({ children }) => {
 };
 
 export default AdminContext;
-
