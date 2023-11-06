@@ -1,6 +1,6 @@
 #brand.py
-from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from flask_sqlalchemy import SQLAlchemy
 
 from app import db
 
@@ -12,7 +12,6 @@ class BrandDetails(db.Model):
     
     # relationship
     products = db.relationship('ProductDetails', backref='brand_details', lazy=True)
-
 
     def __repr__(self):
         return '<Brand %r>' % self.brand

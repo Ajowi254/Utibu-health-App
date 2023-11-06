@@ -1,18 +1,13 @@
 #deleteproduct.py
+from flask import request
+from flask_restful import Resource
 from models.product import ProductDetails
-from flask import jsonify, request
 
-def delete_product(id):
-    try:
-        product_details = ProductDetails()
-        product_details.find_by_id_and_delete(id, request.json)
-        return jsonify({
-            'statusCode': 200,
-            'message': 'Product deleted successfully'
-        })
-    except Exception as error:
-        return jsonify({
-            'error': str(error),
-            'message': 'Product deletion failed',
-            'statusCode': 500
-        })
+class deleteProduct(Resource):
+    def delete(self, id):
+        try:
+            product_details = ProductDetails()
+            product_details.find_by_id_and_delete(id, request.json)
+            return {'statusCode': 200, 'message': 'Product deleted successfully'}
+        except Exception as error:
+            return {'error': str(error), 'message': 'Product deletion failed', 'statusCode': 500}

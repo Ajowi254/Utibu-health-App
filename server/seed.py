@@ -1,3 +1,8 @@
+#seed.py
+# from app import app, db
+from werkzeug.security import generate_password_hash
+from app import create_app, db
+from models.userModel import UserDetails
 from models.orderModal import OrderDetails
 from models.category import CategoryDetails
 from models.brand import BrandDetails
@@ -24,92 +29,72 @@ with app.app_context():
     session = Session(db.engine)
     user = session.get(UserDetails, 2)
 
-
-   
-
 def seed_database():
-    # Create and populate BrandDetails
-    brand1 = BrandDetails(brand="Brand 1")
-    brand2 = BrandDetails(brand="Brand 2")
-    brand3 = BrandDetails(brand="Brand 3")
+    admin_user = UserDetails(
+        name="Admin User",
+        email="ajowi.beryl@gmail.com",
+        password=generate_password_hash("mimi2023"),
+        isAdmin=True
+    )
 
-    # Create and populate CategoryDetails
-    category1 = CategoryDetails(category="Category 1")
-    category2 = CategoryDetails(category="Category 2")
-    category3 = CategoryDetails(category="Category 3")
-
-    # Create and populate UserDetails
     user1 = UserDetails(
         name="User 1",
         email="user1@example.com",
-        password="hashed_password_1",  # Replace with a secure password hash
+        password=generate_password_hash("user1_password"),  # Replace with a secure password hash
         mobile=1234567890,
         age=30,
         dateOfBirth=datetime(1993, 1, 15),
         profileUrl="user1_profile_url",
-        isAdmin="admin"
+        isAdmin=False
     )
+
     user2 = UserDetails(
         name="User 2",
         email="user2@example.com",
-        password="hashed_password_2",  # Replace with a secure password hash
+        password=generate_password_hash("user2_password"),  # Replace with a secure password hash
         mobile=9876543210,
         age=25,
         dateOfBirth=datetime(1998, 5, 20),
         profileUrl="user2_profile_url",
-        isAdmin="none"
+        isAdmin=False
     )
-    
-    # order1 = OrderDetails(
-    #     customer={
-    #         "name": "Customer 1",
-    #         "email": "customer1@example.com"
-    #     },
-    #     order={
-    #         "items": ["item1", "item2", "item3"],
-    #         "total": 100.0
-    #     },
-    #     payment={
-    #         "method": "Credit Card",
-    #         "status": "Paid"
-    #     },
-    #     payment_id="payment123",
-    #     paymenttype="Card",
-    #     billerName="Biller 1",
-    #     billerId="biller123"
-    # )
+
+    brand1 = BrandDetails(brand="Brand 1")
+    brand2 = BrandDetails(brand="Brand 2")
+    brand3 = BrandDetails(brand="Brand 3")
+
+    category1 = CategoryDetails(category="Category 1")
+    category2 = CategoryDetails(category="Category 2")
+    category3 = CategoryDetails(category="Category 3")
 
     customer_data = {
-    'user_id': 2,  # User ID
-    'name': 'User 2',
-    'email': 'user2@example.com',
-    # Other user-related data
+        'user_id': 2,
+        'name': 'User 2',
+        'email': 'user2@example.com',
     }
 
     order_data = {
-    'items': ['item1', 'item2', 'item3'],
-    'total': 100.0,
-    # Other order-related data
+        'items': ['item1', 'item2', 'item3'],
+        'total': 100.0,
     }
 
     payment_data = {
-    'method': 'Credit Card',
-    'status': 'Paid',
-    # Other payment-related data
+        'method': 'Credit Card',
+        'status': 'Paid',
     }
 
     order = OrderDetails(
-    customer=customer_data,
-    order=order_data,
-    payment=payment_data,
-    payment_id='payment123',
-    paymenttype='Card',
-    billerName='Biller 1',
-    billerId='biller123',
-    created_at=datetime.utcnow(),
-    user_id=2,
+        customer=customer_data,
+        order=order_data,
+        payment=payment_data,
+        payment_id='payment123',
+        paymenttype='Card',
+        billerName='Biller 1',
+        billerId='biller123',
+        created_at=datetime.utcnow(),
+        user_id=2,
     )
-    
+
     product1 = ProductDetails(
         brand="Brand 1",
         category="Category 1",
@@ -130,8 +115,7 @@ def seed_database():
         availableInStock=80
     )
 
-    # Add data to the database
-    db.session.add_all([brand1, brand2, brand3, category1, category2, category3, user1, user2, order, product1, product2])
+    db.session.add_all([admin_user, user1, user2, brand1, brand2, brand3, category1, category2, category3, order, product1, product2])
     db.session.commit()
 
 if __name__ == '__main__':

@@ -1,39 +1,41 @@
 # register.py
+from flask import request
+from flask_restful import Resource
 import os
 from models.userModel import UserDetails
-from flask import jsonify, request
 from werkzeug.security import generate_password_hash
 from itsdangerous import URLSafeTimedSerializer
 from .mail import send_email
+from app import db
+class Register(Resource):
+    def post(self):
+        try:
+            data = request.get_json()
+            email = data.get('email', None)
+            password = data.get('password', None)
 
+            user = UserDetails.query.filter_by(email=email).first()
 
-def register():
-    try:
-        email = request.json['email']
-        password = request.json['password']
+            if not user:
+                hashed_password = generate_password_hash(password)
+                new_user = UserDetails(email=email, password=hashed_password)
+                db.session.add(new_user)
+                db.session.commit()
 
-        user = UserDetails.find_one({'email': email})
-        if not user:
-            hashed_password = generate_password_hash(password)
-            new_user = UserDetails.create({'email': email, 'password': hashed_password})
+                return {
+                    'statusCode': 201,
+                    'message': 'User registered successfully. Please check your email to confirm your account.'
+                }
 
-            s = URLSafeTimedSerializer(os.environ.get('SECRET_KEY'))
-            token = s.dumps(new_user.id, salt='your_salt_here')
+            else:
+                return {
+                    'statusCode': 400,
+                    'message': 'Email address already exists'
+                }
 
-            send_email(user.email, token)
-
-            return jsonify({
-                'statusCode': 201,
-                'message': 'User registered successfully. Please check your email to confirm your account.'
-            })
-        else:
-            return jsonify({
-                'statusCode': 400,
-                'message': 'Email address already exists'
-            })
-    except Exception as error:
-        return jsonify({
-            'statusCode': 500,
-            'message': 'Internal Server Error',
-            'error': str(error)
-        })
+        except Exception as error:
+            return {
+                'statusCode': 500,
+                'message': 'Internal Server Error',
+                'error': str(error)
+            }
