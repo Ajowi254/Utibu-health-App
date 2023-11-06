@@ -1,6 +1,6 @@
 #product.py
-from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from flask_sqlalchemy import SQLAlchemy
 
 from app import db
 
@@ -22,3 +22,18 @@ class ProductDetails(db.Model):
 
     def __repr__(self):
         return '<Product %r>' % self.product
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'brand': self.brand,
+            'category': self.category,
+            'product': self.product,
+            'rate': self.rate,
+            'quantity': self.quantity,
+            'sold': self.sold,
+            'productImage': self.productImage,
+            'availableInStock': self.availableInStock,
+            'created_at': self.created_at.isoformat() if self.created_at else None,
+            'brand_id': self.brand_id,
+        }

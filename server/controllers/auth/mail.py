@@ -3,7 +3,6 @@ import os
 import sendgrid
 from sendgrid.helpers.mail import Mail
 
-
 def send_email(email, token):
     message = Mail(
         from_email='from_email@example.com',
