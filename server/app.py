@@ -3,6 +3,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_restful import Api
+from flask_cors import CORS
 
 # Create the SQLAlchemy and Migrate objects here, but don't bind them to an app yet.
 # They will be bound to the Flask app in the create_app function.
@@ -12,6 +13,8 @@ migrate = Migrate()
 def create_app():
     # Create the Flask application
     app = Flask(__name__)
+    CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+    api = Api(app)
 
     # Configure the Flask application
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
@@ -30,7 +33,6 @@ def create_app():
     from models.brand import BrandDetails
 
     # Create an instance of Flask-Restful's Api class
-    api = Api(app)
 
     @app.route('/')
     def home():
@@ -52,8 +54,10 @@ def create_app():
     from controllers.admin.user.users import users
     from controllers.auth.forgotPassword import forgotPassword
     from controllers.auth.login import login
+    from middlewares.authentication import Authentication
+    from controllers.auth.checkSession import CheckSession
     from controllers.auth.passwordResetPage import passwordResetPage
-    from controllers.auth.register import register
+    from controllers.auth.register import Register
     from controllers.user.order.profileUpdate.profileDetail import profileDetail
     from controllers.user.order.profileUpdate.profileUpdate import profileUpdate
     from controllers.user.order.invoice import invoice
@@ -74,9 +78,10 @@ def create_app():
     api.add_resource(switchtouser, '/user/<id>')
     api.add_resource(users, '/users')
     api.add_resource(forgotPassword, '/forgotPassword')
-    api.add_resource(login, '/login')
+    api.add_resource(Authentication, '/login')
+    api.add_resource(CheckSession, '/check-session')
     api.add_resource(passwordResetPage, '/password-reset')
-    api.add_resource(register, '/register')
+    api.add_resource(Register, '/register')
     api.add_resource(profileDetail, '/profile/<id>')
     api.add_resource(profileUpdate, '/profile/<id>/update')
     api.add_resource(invoice, '/invoice/<id>')
