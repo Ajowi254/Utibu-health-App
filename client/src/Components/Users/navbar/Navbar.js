@@ -17,7 +17,7 @@ function Navbar() {
     <>
       <nav>
         <div className='nav_left'>
-          <h5><span className='hed text-white'>Reatil Shop App</span></h5>
+          <h5><span className='hed text-white'>My Duka</span></h5>
         </div>
         <div>
         </div>
