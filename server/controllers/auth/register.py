@@ -1,16 +1,15 @@
 # register.py
 from flask import request
 from flask_restful import Resource
-import os
 from models.userModel import UserDetails
 from werkzeug.security import generate_password_hash
-from itsdangerous import URLSafeTimedSerializer
-from .mail import send_email
 from app import db
+
 class register(Resource):
     def post(self):
         try:
             data = request.get_json()
+            name = data.get('name', None)
             email = data.get('email', None)
             password = data.get('password', None)
 
@@ -18,7 +17,7 @@ class register(Resource):
 
             if not user:
                 hashed_password = generate_password_hash(password)
-                new_user = UserDetails(email=email, password=hashed_password)
+                new_user = UserDetails(name=name, email=email, password=hashed_password)
                 db.session.add(new_user)
                 db.session.commit()
 
@@ -32,7 +31,6 @@ class register(Resource):
                     'statusCode': 400,
                     'message': 'Email address already exists'
                 }
-
         except Exception as error:
             return {
                 'statusCode': 500,

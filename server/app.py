@@ -36,7 +36,7 @@ def create_app():
 
     # Import your resources here
     from controllers.admin.brand.add_brand import add_brand
-    from controllers.admin.brand.brand import brand
+    from controllers.admin.brand.get_brands import get_brands
     from controllers.admin.brand.delete_brand import delete_brand
     from controllers.admin.brand.edit_brand import edit_brand
     from controllers.admin.category.add_category import add_category
@@ -66,26 +66,26 @@ def create_app():
     from controllers.auth.logout import Logout
 
     # Add your resources to the Api
-    api.add_resource(add_brand, '/Addbrand')
-    api.add_resource(brand, '/brand')
-    api.add_resource(edit_product, '/product/<id>')
-    api.add_resource(delete_brand, '/brand/<id>')
-    api.add_resource(edit_brand, '/brand/<id>')
-    api.add_resource(add_category, '/addCategory')
-    api.add_resource(category, '/category')
-    api.add_resource(delete_category, '/category/<id>')
-    api.add_resource(edit_category, '/category/<id>')
+    api.add_resource(add_brand, '/brand')#
+    api.add_resource(get_brands, '/brands')#
+    api.add_resource(delete_brand, '/brand/<int:id>')#
+    api.add_resource(edit_brand, '/brand/<int:id>')#
+    api.add_resource(add_category, '/addCategory')#
+    api.add_resource(category, '/category')#
+    api.add_resource(delete_category, '/category/<int:id>')#
+    api.add_resource(edit_category, '/category/<int:id>')#
     api.add_resource(add_product, '/addProduct')
+    api.add_resource(edit_product, '/product/<id>')
     api.add_resource(product, '/product')
     api.add_resource(delete_product, '/product/<id>')
     api.add_resource(create_product, '/product/create')
     api.add_resource(switchtouser, '/user/<id>')
-    api.add_resource(users, '/users')
+    api.add_resource(users, '/users')#
     api.add_resource(forgot_password, '/forgotPassword')
-    api.add_resource(authentication, '/login')
+    api.add_resource(authentication, '/login')#
     api.add_resource(CheckSession, '/check-session')
     api.add_resource(passwordResetPage, '/password-reset')
-    api.add_resource(register, '/register')
+    api.add_resource(register, '/register')#
     api.add_resource(profile_detail, '/profile/<id>')
     api.add_resource(profile_update, '/profile/<id>/update')
     api.add_resource(invoice, '/invoice/<id>')

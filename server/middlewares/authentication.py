@@ -1,15 +1,11 @@
-#authentication.py
-from flask import Flask, request, jsonify
-from flask_restful import Api, Resource
+# authentication.py
+from flask import app, request
+from flask_restful import Resource
+from models.userModel import UserDetails
 from werkzeug.security import check_password_hash
 import jwt
-import os
-from models.userModel import UserDetails
-app = Flask(__name__)
-api = Api(app)
+from app import db
 
-# Define a SECRET_KEY in your app configuration.
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 class authentication(Resource):
     def post(self):
         try:
@@ -37,7 +33,6 @@ class authentication(Resource):
                     'statusCode': 401,
                     'message': 'Invalid email or password',
                 }
-
         except Exception as error:
             return {
                 'statusCode': 500,

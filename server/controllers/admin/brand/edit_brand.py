@@ -6,8 +6,7 @@ from models.brand import BrandDetails
 class edit_brand(Resource):
     def put(self, id):
         try:
-            brand_details = BrandDetails()
-            brand_details.find_by_id_and_update(id, request.json)
+            BrandDetails.find_by_id_and_update(id, request.json)
             return {'statusCode': 200, 'message': 'Brand updated successfully'}
         except Exception as error:
             return {'error': str(error), 'message': 'Brand update failed', 'statusCode': 500}

@@ -1,7 +1,6 @@
-#category.py
+# category.py
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
-
 from app import db
 
 class CategoryDetails(db.Model):
@@ -12,3 +11,10 @@ class CategoryDetails(db.Model):
 
     def __repr__(self):
         return '<Category %r>' % self.category
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'category': self.category,
+            'created_at': self.created_at.isoformat() if self.created_at else None,
+        }
