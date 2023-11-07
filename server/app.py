@@ -78,22 +78,22 @@ def create_app():
     api.add_resource(edit_product, '/product/<int:id>')#
     api.add_resource(product, '/product')#
     api.add_resource(delete_product, '/product/<id>')#
-    api.add_resource(create_product, '/product/create')
+    api.add_resource(create_product, '/product/create')#
     api.add_resource(switchtouser, '/user/<id>')#
     api.add_resource(users, '/users')#
-    api.add_resource(forgot_password, '/forgotPassword')
+    api.add_resource(forgot_password, '/forgotPassword')###
     api.add_resource(authentication, '/login')#
-    api.add_resource(CheckSession, '/check-session')
-    api.add_resource(passwordResetPage, '/password-reset')
+    api.add_resource(CheckSession, '/check-session')#
+    api.add_resource(passwordResetPage, '/password-reset')###
     api.add_resource(register, '/register')#
-    api.add_resource(profile_detail, '/profile/<id>')
-    api.add_resource(profile_update, '/profile/<id>/update')
-    api.add_resource(invoice, '/invoice/<id>')
-    api.add_resource(your_order, '/order/<id>')
-    api.add_resource(dashboard_overview, '/dashboardoverview')
-    api.add_resource(bar_chart, '/dashboardbarchart')
-    api.add_resource(dashboard_product, '/dashboardproduct')
-    api.add_resource(Logout, '/logout')
+    api.add_resource(profile_detail, '/profile/<int:id>')#
+    api.add_resource(profile_update, '/profile/<int:id>/update')#
+    api.add_resource(invoice, '/invoice/<int:id>')#
+    api.add_resource(your_order, '/order/<int:id>')#
+    api.add_resource(dashboard_overview, '/dashboardoverview')#
+    api.add_resource(bar_chart, '/dashboardbarchart')###
+    api.add_resource(dashboard_product, '/dashboardproduct')#
+    api.add_resource(Logout, '/logout')#
 
     return app
 if __name__ == '__main__':

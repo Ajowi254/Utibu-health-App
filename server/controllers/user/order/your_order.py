@@ -5,11 +5,11 @@ from models.orderModal import OrderDetails
 class your_order(Resource):
     def get(self, id):
         try:
-            value = OrderDetails.find()
-            data = [item for item in value if item['billerId'] == id]
+            value = OrderDetails.query.all()
+            data = [item for item in value if item.billerId == id]
             return {
                 'message': 'Order details sent successfully',
-                'data': data
+                'data': [item.to_dict() for item in data]  # Assuming you have a to_dict method to serialize the object
             }
         except Exception as error:
             return {

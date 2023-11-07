@@ -4,7 +4,7 @@ from flask_restful import Resource
 from models.orderModal import OrderDetails
 
 class bar_chart(Resource):
-    def get(self, id):
+    def get(self):
         try:
             month = {
                 'january': 0,
@@ -21,12 +21,12 @@ class bar_chart(Resource):
                 'december': 0
             }
 
-            value = OrderDetails.find()
-            data = [item for item in value if item['customer']['orderDate'].split('.')[2] == id]
+            value = OrderDetails.query.all()
+            data = [item for item in value if item.customer.orderDate.split('.')[2] == id]
 
             for item in data:
-                m = item['customer']['orderDate'].split('.')[1]
-                total = float(item['payment']['Total'])
+                m = item.customer.orderDate.split('.')[1]
+                total = float(item.payment.Total)
 
                 if m == '01':
                     month['january'] += total

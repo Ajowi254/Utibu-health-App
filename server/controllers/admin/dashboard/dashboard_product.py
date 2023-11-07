@@ -8,8 +8,8 @@ class dashboard_product(Resource):
     def get(self):
         try:
             q = request.args.get('q')
-            value = ProductDetails.find()
-            products = [{'product': item['product'], 'bought': item['quantity'], 'sold': item['sold'], 'availableStock': item['availableInStock']} for item in value]
+            value = ProductDetails.query.all()
+            products = [{'product': item.product, 'bought': item.quantity, 'sold': item.sold, 'availableStock': item.availableInStock} for item in value]
             
             if not q:
                 return {'statusCode': 200, 'products': products}
