@@ -3,7 +3,7 @@ from flask import request
 from flask_restful import Resource
 from models.orderModal import OrderDetails
 
-class barChart(Resource):
+class bar_chart(Resource):
     def get(self, id):
         try:
             month = {

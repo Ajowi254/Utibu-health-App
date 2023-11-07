@@ -3,7 +3,7 @@ from flask import request
 from flask_restful import Resource
 from models.userModel import UserDetails
 
-class profileUpdate(Resource):
+class profile_update(Resource):
     def put(self, id):
         try:
             name = request.json['name']

@@ -3,7 +3,7 @@ from flask_restful import Resource
 from models.brand import BrandDetails
 from flask import jsonify, request
 
-class AddBrand(Resource):
+class add_brand(Resource):
     def post(self):
         try:
             brand_details = BrandDetails()

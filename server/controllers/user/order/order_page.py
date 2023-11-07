@@ -4,7 +4,7 @@ from flask_restful import Resource
 from models.orderModal import OrderDetails
 from models.product import ProductDetails
 
-class orderPage(Resource):
+class order_page(Resource):
     def post(self):
         try:
             order = request.json['order']

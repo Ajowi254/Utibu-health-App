@@ -3,7 +3,7 @@ from flask import request
 from flask_restful import Resource
 from models.brand import BrandDetails
 
-class deleteBrand(Resource):
+class delete_brand(Resource):
     def delete(self, id):
         try:
             brand_details = BrandDetails()

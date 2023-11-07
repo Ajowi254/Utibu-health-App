@@ -3,7 +3,7 @@ from flask import request
 from flask_restful import Resource
 from models.category import CategoryDetails
 
-class addCategory(Resource):
+class add_category(Resource):
     def post(self):
         try:
             category_details = CategoryDetails()

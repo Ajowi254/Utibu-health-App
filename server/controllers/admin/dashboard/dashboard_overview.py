@@ -2,7 +2,7 @@
 from flask_restful import Resource
 from models.product import ProductDetails
 
-class dashboardOverview(Resource):
+class dashboard_overview(Resource):
     def get(self):
         try:
             value = ProductDetails.find()

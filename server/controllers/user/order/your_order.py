@@ -2,7 +2,7 @@
 from flask_restful import Resource
 from models.orderModal import OrderDetails
 
-class yourOrder(Resource):
+class your_order(Resource):
     def get(self, id):
         try:
             value = OrderDetails.find()

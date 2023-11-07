@@ -10,7 +10,7 @@ api = Api(app)
 
 # Define a SECRET_KEY in your app configuration.
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
-class Authentication(Resource):
+class authentication(Resource):
     def post(self):
         try:
             data = request.get_json()

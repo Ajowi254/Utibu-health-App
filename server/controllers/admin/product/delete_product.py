@@ -3,7 +3,7 @@ from flask import request
 from flask_restful import Resource
 from models.product import ProductDetails
 
-class deleteProduct(Resource):
+class delete_product(Resource):
     def delete(self, id):
         try:
             product_details = ProductDetails()

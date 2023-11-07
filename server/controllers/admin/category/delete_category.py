@@ -3,7 +3,7 @@ from flask import request
 from flask_restful import Resource
 from models.category import CategoryDetails
 
-class deleteCategory(Resource):
+class delete_category(Resource):
     def delete(self, id):
         try:
             category_details = CategoryDetails()

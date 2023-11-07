@@ -3,7 +3,7 @@ from flask import request
 from flask_restful import Resource
 from models.product import ProductDetails
 
-class editProduct(Resource):
+class edit_product(Resource):
     def put(self, id):
         try:
             quantity = request.json['quantity']

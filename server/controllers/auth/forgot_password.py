@@ -9,7 +9,7 @@ import os
 app = Flask(__name__)
 mail = Mail(app)
 
-class forgotPassword(Resource):
+class forgot_password(Resource):
     def post(self):
         try:
             email = request.json['email']

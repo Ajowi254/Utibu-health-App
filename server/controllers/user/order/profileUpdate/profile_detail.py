@@ -2,7 +2,7 @@
 from flask_restful import Resource
 from models.userModel import UserDetails
 
-class profileDetail(Resource):
+class profile_detail(Resource):
     def get(self, id):
         try:
             data = UserDetails.find_by_id(id)

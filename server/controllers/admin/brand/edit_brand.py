@@ -3,7 +3,7 @@ from flask import request
 from flask_restful import Resource
 from models.brand import BrandDetails
 
-class editBrand(Resource):
+class edit_brand(Resource):
     def put(self, id):
         try:
             brand_details = BrandDetails()

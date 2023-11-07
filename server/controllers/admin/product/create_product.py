@@ -11,7 +11,7 @@ cloudinary.config(
   api_secret = 'cZNbH3XKKKk48_XgTkf5if-DsSU'  
 )
 
-class createProduct(Resource):
+class create_product(Resource):
     def post(self):
         try:
             image_file = request.files.get('productImage')

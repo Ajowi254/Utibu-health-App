@@ -4,7 +4,7 @@ from flask_restful import Resource
 from models.product import ProductDetails
 import re
 
-class dashboardProduct(Resource):
+class dashboard_product(Resource):
     def get(self):
         try:
             q = request.args.get('q')

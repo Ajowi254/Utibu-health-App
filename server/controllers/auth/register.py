@@ -7,7 +7,7 @@ from werkzeug.security import generate_password_hash
 from itsdangerous import URLSafeTimedSerializer
 from .mail import send_email
 from app import db
-class Register(Resource):
+class register(Resource):
     def post(self):
         try:
             data = request.get_json()
