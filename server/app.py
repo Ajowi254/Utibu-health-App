@@ -74,12 +74,12 @@ def create_app():
     api.add_resource(category, '/category')#
     api.add_resource(delete_category, '/category/<int:id>')#
     api.add_resource(edit_category, '/category/<int:id>')#
-    api.add_resource(add_product, '/addProduct')
-    api.add_resource(edit_product, '/product/<id>')
-    api.add_resource(product, '/product')
-    api.add_resource(delete_product, '/product/<id>')
+    api.add_resource(add_product, '/addProduct')#
+    api.add_resource(edit_product, '/product/<int:id>')#
+    api.add_resource(product, '/product')#
+    api.add_resource(delete_product, '/product/<id>')#
     api.add_resource(create_product, '/product/create')
-    api.add_resource(switchtouser, '/user/<id>')
+    api.add_resource(switchtouser, '/user/<id>')#
     api.add_resource(users, '/users')#
     api.add_resource(forgot_password, '/forgotPassword')
     api.add_resource(authentication, '/login')#
