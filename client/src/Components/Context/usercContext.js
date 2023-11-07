@@ -32,7 +32,7 @@ export const UserProvider = ({ children }) => {
   const productData = async () => {
     try {
       let value;
-      value = await axios.get(`${env.api}/inventory/products`);
+      value = await axios.get(`${env.api}/product`);
       setProduct(value.data.data);
     } catch (error) {
       console.log(error);

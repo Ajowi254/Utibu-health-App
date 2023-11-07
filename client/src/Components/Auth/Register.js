@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
-import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
-import { env } from "../../config";
 import load from "../../asset/loading2.svg";
 
 function Register() {
@@ -27,60 +25,47 @@ function Register() {
       }
       if (values.email.length === 0) {
         errors.email = "Enter your email address";
-      } else if (values.email.search(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/)) {
+      } else if (!/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(values.email)) {
         errors.email = "Please provide a valid email address";
       }
 
-      function validateMobile(mobilenumber) {
-        // var mob_regex = /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$/;
-        var regmm = "^([0|+[0-9]{1,5})?([7-9][0-9]{9})$";
-        var regmob = new RegExp(regmm);
-        if (values.mobile.length === 0) {
-          return (errors.mobile = "Enter your mobile number");
-        }
-        if (regmob.test(mobilenumber)) {
-          return errors;
-        } else {
-          return (errors.mobile = "Please provide a valid mobile number");
-        }
+      if (values.mobile.length === 0) {
+        errors.mobile = "Enter your mobile number";
+      } else if (!/^[0-9]{10}$/.test(values.mobile)) {
+        errors.mobile = "Please provide a valid 10-digit mobile number";
       }
-
-      validateMobile(values.mobile);
 
       if (values.password.length === 0) {
-        errors.password = "Enter your passowrd";
-      } else if (values.password.search(/[a-z]/i) < 0) {
-        errors.password = "Your password must contain at least one letter";
-      } else if (values.password.search(/[0-9]/) < 0) {
-        errors.password = "Your password must contain at least one digit";
-      } else if (values.password.length < 8) {
-        errors.password = "Your password must be at least 8 characters";
+        errors.password = "Enter your password";
+      } else if (!/(?=.*[A-Za-z])(?=.*\d).{8,}/.test(values.password)) {
+        errors.password = "Your password must contain at least one letter, one digit, and be at least 8 characters long";
       }
+
       if (values.conformPassword !== values.password) {
-        errors.conformPassword = "Conform password does not match";
+        errors.conformPassword = "Confirm password does not match";
       } else if (values.conformPassword.length === 0) {
-        errors.conformPassword = "Enter your conform password";
+        errors.conformPassword = "Enter your confirm password";
       }
+
       return errors;
     },
 
-    onSubmit: async (values) => {
+    onSubmit: (values) => {
       try {
-        delete values.conformPassword;
-        setloading(true)
-        let user = await axios.post(`${env.api}/register`, values);
-        const { data } = user;
-        const { message, statusCode } = data;
-        if (statusCode === 201) {
-          setloading(false)
-          toast.success(message);
-          setTimeout(() => {
-            navigate("/");
-          }, 700);
-        }else{
-          setloading(false)
-          toast.warn(message);
-        }
+        // Simulate registration process
+        // You can customize this part to meet your requirements
+        setloading(true);
+        localStorage.setItem("name", values.name);
+        localStorage.setItem("email", values.email);
+        localStorage.setItem("mobile", values.mobile);
+        localStorage.setItem("password", values.password);
+
+        setloading(false);
+        toast.success("Registration successful!");
+
+        setTimeout(() => {
+          navigate("/");
+        }, 700);
       } catch (error) {
         console.log(error);
       }
@@ -92,8 +77,9 @@ function Register() {
       <div className="containers">
         <form
           className="form"
-          onSubmit={(values) => {
-            formik.handleSubmit(values);
+          onSubmit={(e) => {
+            e.preventDefault();
+            formik.handleSubmit();
           }}
         >
           <h4 className="text-center mb-4">Register Form</h4>
@@ -123,17 +109,16 @@ function Register() {
               onBlur={formik.handleBlur}
               name="email"
             />
-
             {formik.touched.email && formik.errors.email ? (
               <div className="error"> {formik.errors.email}</div>
             ) : null}
           </div>
           <div className="mb-3">
-            <label className="form-label">Mobile</label>
+            <label className="form-label">Mobile Number</label>
             <input
               type="text"
               className="form-control shadow-none"
-              placeholder="Enter your mobile number"
+              placeholder="Enter your 10-digit mobile number"
               value={formik.values.mobile}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -148,7 +133,7 @@ function Register() {
             <input
               type="password"
               className="form-control shadow-none"
-              placeholder="Enter you Password "
+              placeholder="Enter your Password"
               value={formik.values.password}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -159,11 +144,11 @@ function Register() {
             ) : null}
           </div>
           <div className="mb-3">
-            <label className="form-label ">Conform Password</label>
+            <label className="form-label">Confirm Password</label>
             <input
               type="password"
               className="form-control shadow-none"
-              placeholder="Enter you Conform Password"
+              placeholder="Confirm your Password"
               value={formik.values.conformPassword}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -174,13 +159,9 @@ function Register() {
             ) : null}
           </div>
           <button type="submit" className="btns btn" disabled={!formik.isValid}>
-                {loading ? (
-              <img
-                src={load}
-                alt="load"
-                className="spinner"
-              />
-            ) : " SignUp "}
+            {loading ? (
+              <img src={load} alt="load" className="spinner" />
+            ) : "Sign Up"}
           </button>
           <div className="mt-3 new_user">
             <span>
