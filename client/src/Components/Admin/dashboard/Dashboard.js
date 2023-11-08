@@ -15,21 +15,21 @@ function Dashboard() {
     {
       title: "Total Products",
       value: dashboardOverview.totalProducts,
-      color: "rgb(255, 73, 209)",
+      color: "rgba(121, 229, 214, 0.812)",
       theam: "primary",
       icon: faPenToSquare,
     },
     {
       title: "Total Quantity Bought",
       value: dashboardOverview.bought,
-      color: "rgb(255, 73, 209)",
+      color: "rgba(121, 229, 214, 0.812)",
       theam: "success",
       icon: "fa-dollar-sign",
     },
     {
       title: "Sold",
       value: dashboardOverview.sold,
-      color: "rgb(255, 73, 209)",
+      color: "rgba(121, 229, 214, 0.812)",
       theam: "warning",
       icon: "fa-comments",
     },
@@ -37,14 +37,14 @@ function Dashboard() {
     {
       title: "Out Of Stock",
       value: dashboardOverview.outOfStock,
-      color: "rgb(255, 73, 209)",
+      color: "rgba(121, 229, 214, 0.812)",
       theam: "info",
       icon: "fa-clipboard-list"
     },
     {
       title: "Available Stock",
       value: dashboardOverview.totalAvaliableStock,
-      color: "rgb(255, 73, 209)",
+      color: "rgba(121, 229, 214, 0.812)",
       theam: "warning",
       icon: "fa-comments",
     },

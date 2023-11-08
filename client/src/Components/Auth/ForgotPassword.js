@@ -1,4 +1,3 @@
-//forgotPassword.js
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import axios from "axios";

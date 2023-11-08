@@ -62,7 +62,8 @@ td:hover {
   justify-content: flex-end;
   align-items: center;
   height: 100vh;
-  /* background-image: url("../src/asset/retail.jpg"); */
+  background-image: url("../src/asset/bk.jpg");
+  background-color: #759600;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

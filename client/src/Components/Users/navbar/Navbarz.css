@@ -6,7 +6,7 @@
 nav{
     display: flex;
     align-items: center;
-    background-color: #508197;
+    background-color: rgba(121, 229, 214, 0.812);
     color: white;
     font-family: 'Poppins', sans-serif;
     top: 0;
@@ -43,11 +43,11 @@ padding: 3px 15px;
 margin: 5px;
 }
 .nav_rights >   div:hover {
-    color:rgb(74, 255, 134);
+    color:rgb(24, 216, 98);
 }
 
 .icon{
-    color: rgb(12, 12, 12);
+    color: rgb(6, 6, 6);
     font-size: 0.5rem;
     margin-right: 7px;
 }
@@ -71,7 +71,7 @@ margin: 5px;
     width: 100%;
     position: absolute;
     top: 100%;
-    background-color:#26A244;
+    background-color:#5f886a;
 }
 .menu_icon {
     display: block;
