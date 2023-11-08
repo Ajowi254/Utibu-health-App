@@ -70,7 +70,7 @@ export const AdminProvider = ({ children }) => {
         try {
             let value;
             if (!query) {
-                value = await axios.get(`${env.api}/brand`);
+                value = await axios.get(`${env.api}/brands`);
             } else {
                 value = await axios.get(`${env.api}/brand?q=${query}`);
             }
@@ -148,7 +148,7 @@ export const AdminProvider = ({ children }) => {
 
     const addCategory = async (values) => {
         try {
-            let user = await axios.post(`${env.api}/category`, values);
+            let user = await axios.post(`${env.api}/addCategory`, values);
             getCategory()
             const { data } = user;
             const { message, statusCode } = data;
@@ -201,7 +201,7 @@ export const AdminProvider = ({ children }) => {
         try {
             let value;
             if (!query) {
-                value = await axios.get(`${env.api}/products`);
+                value = await axios.get(`${env.api}/product`);
             } else {
                 value = await axios.get(`${env.api}/products?q=${query}`);
             }
@@ -215,7 +215,7 @@ export const AdminProvider = ({ children }) => {
 
     const addProduct = async (values) => {
         try {
-            let user = await axios.post(`${env.api}/product`, values);
+            let user = await axios.post(`${env.api}/addProduct`, values);
             const { data } = user;
             const { message, statusCode } = data;
             if (statusCode === 201) {
@@ -269,9 +269,9 @@ export const AdminProvider = ({ children }) => {
         try {
             let value;
             if (!query) {
-                value = await axios.get(`${env.api}dashboard-products`);
+                value = await axios.get(`${env.api}/dashboardproduct`);
             } else {
-                value = await axios.get(`${env.api}dashboard-products?q=${query}`);
+                value = await axios.get(`${env.api}/dashboardproduct?q=${query}`);
             }
             const { data } = value;
             setDashboardProduct(data.products);
@@ -282,7 +282,7 @@ export const AdminProvider = ({ children }) => {
 
     const getDashboardOverview = async () => {
         try {
-            let value = await axios.get(`${env.api}dashboard-overview`);
+            let value = await axios.get(`${env.api}/dashboardoverview`);
             const { data } = value;
             setDashboardOverview(data);
         } catch (error) {
@@ -294,7 +294,7 @@ export const AdminProvider = ({ children }) => {
         try {
             console.log(query);
            
-                let value = await axios.get(`${env.api}dashboard-barChart/${query}`);
+                let value = await axios.get(`${env.api}/dashboardbarchart/${query}`);
            
             const { data } = value;
             setDashboardBarChart(data);
