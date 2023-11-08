@@ -17,7 +17,7 @@ class login(Resource):
                     secret_key = os.environ.get('SECRET_KEY')
                     token = jwt.encode({'id': user['_id'], 'isAdmin': user['isAdmin']}, secret_key, algorithm='HS256')
                     return {
-                        'statusCode': 201,
+                        'statusCode': 200,
                         'message': 'Login successfully',
                         'token': token,
                         'isAdmin': user['isAdmin'],
