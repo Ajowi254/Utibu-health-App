@@ -52,8 +52,6 @@ function Register() {
 
     onSubmit: (values) => {
       try {
-        // Simulate registration process
-        // You can customize this part to meet your requirements
         setloading(true);
         localStorage.setItem("name", values.name);
         localStorage.setItem("email", values.email);
