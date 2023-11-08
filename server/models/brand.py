@@ -1,7 +1,6 @@
 #brand.py
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
-
 from app import db
 
 class BrandDetails(db.Model):
@@ -15,3 +14,19 @@ class BrandDetails(db.Model):
 
     def __repr__(self):
         return '<Brand %r>' % self.brand
+
+    @classmethod
+    def find_by_id_and_update(cls, id, data):
+        brand = cls.query.get(id)
+        if not brand:
+            raise Exception('Brand not found')
+        for key, value in data.items():
+            setattr(brand, key, value)
+        db.session.commit()
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'brand': self.brand,
+            'created_at': self.created_at.isoformat() if self.created_at else None,
+        }
