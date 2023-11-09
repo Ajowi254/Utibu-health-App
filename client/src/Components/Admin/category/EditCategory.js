@@ -4,6 +4,7 @@ import { NavLink, useParams } from "react-router-dom";
 import AdminContext from "../../Context/adminContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faXmark,faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
+
 function EditCategory() {
   const params = useParams();
   const { category, editCategory } = useContext(AdminContext);
@@ -11,11 +12,10 @@ function EditCategory() {
 
   const formik = useFormik({
     initialValues: {
-      category: viewCategory.category,
+      category: viewCategory ? viewCategory.category : '',
     },
     validate: (values) => {
       const errors = {};
-
       if (values.category.length === 0) {
         errors.category = "Enter your Category";
       }
