@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import AdminContext from '../../Context/adminContext';
 import Search from '../../Search';
@@ -11,14 +11,20 @@ function ViewCategory() {
 
   let navigate = useNavigate();
   const context = useContext(AdminContext);
-  const { category, deleteCategory, getCategory } = context
+  const { category, deleteCategory, getCategory,currentPage, setCurrentPage, totalPages } = context;
+
   const handleEdit = (id) => {
-    navigate(`/home/category/edit-category/${id}`)
-  }
+    navigate(`/home/category/edit-category/${id}`);
+  };
+  
   const handledelete = async (id) => {
     console.log(id);
     await deleteCategory(id)
-  }
+  };
+  useEffect(() => {
+    getCategory();
+}, [currentPage]);
+
   return (
     <div>
       <div className="comman_header">Home/Category</div>
