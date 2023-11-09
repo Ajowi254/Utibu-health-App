@@ -18,6 +18,7 @@ function Inventory() {
         type="search"
         placeholder={"Avaliable Stock Value"}
         onChange={(e) =>getDashboardProduct(e.target.value)}
+        
       />
     </div>
 
@@ -39,12 +40,13 @@ function Inventory() {
             <tbody>
               {
                 dashboardProduct.length > 0 && dashboardProduct.map((item, index) => {
+                  console.log(dashboardProduct)
                   return <tr key={index}>
                     <td >{index + 1}</td>
                     <td>{item.product}</td>
                     <td>{item.bought}</td>
                     <td>{item.sold}</td>
-                    <td>{item.avaliableStock}</td>
+                    <td>{item.availableStock}</td>
                   </tr>
                 })
               }

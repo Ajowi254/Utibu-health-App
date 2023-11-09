@@ -6,9 +6,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faXmark,faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
 
 function EditBrand() {
-  const params = useParams();
+  const {id} = useParams();
   const { brand, editBrand } = useContext(AdminContext);
-  let viewBrand = brand.find((item) => item._id === params.id);
+let viewBrand = brand.find((item) => item.id === id);
 
   const formik = useFormik({
     initialValues: {
@@ -21,10 +21,15 @@ function EditBrand() {
       }
       return errors;
     },
-    onSubmit: async (values) => {
-      await editBrand(values, viewBrand._id);
+    onSubmit:  (values) => {
+      // console.log(values,'values')
+      // console.log(viewBrand.id, 'viewBrand')
+      // console.log(params.id, 'params')
+      
+     editBrand(values, id);
     },
   });
+  
   return (
     <div>
       <div className="comman_header mt-3 ">Home/Brand/Edit Brand</div>

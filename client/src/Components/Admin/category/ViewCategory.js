@@ -61,12 +61,12 @@ function ViewCategory() {
                     <td>{item.category}</td>
                     <td>
                       <button type="button" className="btn btn-success" onClick={() => {
-                        handleEdit(item._id)
+                        handleEdit(item.id)
                       }}>
                         <span className='cz' ><FontAwesomeIcon icon={ faPenToSquare}/></span> Edit
                       </button>
                       <button type="button" className="btn btn-secondary ms-2" onClick={() => {
-                        handledelete(item._id)
+                        handledelete(item.id)
                       }}>
                        <span className='cz' ><FontAwesomeIcon icon={ faTrash}/></span>  Delete
                       </button>
