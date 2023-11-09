@@ -49,30 +49,24 @@ function ViewBrand() {
               </tr>
             </thead>
             <tbody>
-              {
-                brand.length > 0 && brand.map((item, index) => {
-                  return <tr key={index}>
-                    <td>{index + 1}</td>
-                    <td>{item.brand}</td>
-                    <td>
-                      <button type="button" className="btn btn-success" onClick={() => {
-                        handleEdit(item._id)
-                      }}>
-                        <span className='cz' ><FontAwesomeIcon icon={faPenToSquare} /></span> Edit
-                      </button>
-                      <button type="button" className="btn btn-secondary ms-2" onClick={() => {
-                        handledelete(item._id)
-                      }}>
-                        <span className='cz' ><FontAwesomeIcon icon={faTrash} /></span> Delete
-                      </button>
-
-                    </td>
-
-                  </tr>
-
-                })
-              }
-
+            {
+  brand.length > 0 && brand.map((item, index) => {
+    return (
+      <tr key={index}>
+        <td>{index + 1}</td>
+        <td>{item.brand}</td>
+        <td>
+          <button type="button" className="btn btn-success" onClick={() => handleEdit(item._id)}>
+            <span className='cz' ><FontAwesomeIcon icon={faPenToSquare} /></span> Edit
+          </button>
+          <button type="button" className="btn btn-secondary ms-2" onClick={() => handledelete(item._id)}>
+            <span className='cz' ><FontAwesomeIcon icon={faTrash} /></span> Delete
+          </button>
+        </td>
+      </tr>
+    )
+  })
+}
             </tbody>
 
           </table>

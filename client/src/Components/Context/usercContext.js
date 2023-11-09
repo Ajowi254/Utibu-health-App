@@ -3,7 +3,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { env } from "../../config";
 
-
 let UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
@@ -13,21 +12,13 @@ export const UserProvider = ({ children }) => {
   const [orders, setOrders] = useState({});
   let [data, setData] = useState({});
 
-
-
-
   useEffect(() => {
     productData()
   }, [])
 
-
-
-
   useEffect(() => {
     productData()
   }, [orders])
-
-
 
   const productData = async () => {
     try {
@@ -38,7 +29,6 @@ export const UserProvider = ({ children }) => {
       console.log(error);
     }
   };
-
   const setOrderz = async (data) => {
     const { paymenttype } = data;
     if (paymenttype === "online_payment") {
@@ -50,7 +40,6 @@ export const UserProvider = ({ children }) => {
     }
   }
 
-
   const getInvoice = async (id) => {
     try {
       let value = await axios.get(`${env.api}/orders/invoice/${id}`);
@@ -60,7 +49,6 @@ export const UserProvider = ({ children }) => {
       console.log(error);
     }
   };
-
 
   return (
     <UserContext.Provider value={{ username, setUsername, product, orders, setOrders, setOrderz, data, getInvoice,productData }}>
