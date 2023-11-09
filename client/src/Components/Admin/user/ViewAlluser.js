@@ -16,7 +16,8 @@ function ViewAlluser() {
   const handleChange = async (id, e) => {
     try {
       console.log(id);
-      let value = await axios.put(`${env.api}/user/change-user/${id}`, { e });
+      let value = await axios.put(`${env.api}/user/${id}`, { e });
+   
       const { data } = value;
       if (data.statusCode === 200) {
         getUser();
@@ -72,7 +73,7 @@ function ViewAlluser() {
                     <td>{index + 1}</td>
                     <td>{item.name}</td>
                     <td>{item.email}</td>
-                    <td> <select className="form-select shadow-none" onChange={(e) => handleChange(item._id, e.target.value)} value={item.isAdmin}>
+                    <td> <select className="form-select shadow-none" onChange={(e) => handleChange(item.id, e.target.value)} value={item.isAdmin}>
                       <option selected value="admin">Admin</option>
                       <option selected value="user">User</option>
                       <option selected value="none">None</option>
@@ -80,7 +81,7 @@ function ViewAlluser() {
                     {/* {noOfOrder(item._id)} */}
 
                     {/* <td value={finder(item._id)}></td> */}
-                    <td> <NavLink to={`/home/users/user/${item._id}`}> <button type="submit" className="btn btn-success ms-3"> <span className='cz' ><FontAwesomeIcon icon={ faEye}/></span> View</button> </NavLink> </td>
+                    <td> <NavLink to={`/home/users/user/${item.id}`}> <button type="submit" className="btn btn-success ms-3"> <span className='cz' ><FontAwesomeIcon icon={ faEye}/></span> View</button> </NavLink> </td>
                   </tr>
                 })
               }

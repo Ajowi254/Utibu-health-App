@@ -4,7 +4,7 @@ import AdminContext from '../../Context/adminContext';
 import Search from '../../Search';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faPenToSquare,faTrash,faPlus ,faEye} from '@fortawesome/free-solid-svg-icons'
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function ViewProducts() {
@@ -61,17 +61,17 @@ function ViewProducts() {
                     <td><img src={item.productImage} alt={item.product} className="product-img" /> </td>
                     <td>
                       <button type="button" className="btn btn-success mt-1" onClick={() => {
-                        handleView(item._id)
+                        handleView(item.id)
                       }}>
                        <span className='cz' ><FontAwesomeIcon icon={ faEye}/></span> View
                       </button>
                       <button type="button" className="btn btn-warning ms-2 mt-1" onClick={() => {
-                        handleEdit(item._id)
+                        handleEdit(item.id)
                       }}>
                        <span className='cz' ><FontAwesomeIcon icon={ faPenToSquare}/></span> Edit
                       </button>
                       <button type="button" className="btn btn-secondary ms-2 mt-1" onClick={() => {
-                        handledelete(item._id)
+                        handledelete(item.id)
                       }}>
                       <span className='cz' ><FontAwesomeIcon icon={ faTrash}/></span>  Delete
                       </button>

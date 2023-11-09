@@ -4,7 +4,8 @@ from flask_restful import Resource
 from models.userModel import UserDetails
 from werkzeug.security import check_password_hash
 import jwt
-from app import db
+from models.dbconfig import db
+from config import Config
 
 class authentication(Resource):
     def post(self):
@@ -16,8 +17,8 @@ class authentication(Resource):
             user = UserDetails.query.filter_by(email=email).first()
 
             if user and check_password_hash(user.password, password):
-                secret_key = app.config['SECRET_KEY']
-                token = jwt.encode({'id': user.id, 'isAdmin': user.isAdmin}, secret_key, algorithm='HS256')
+                SECRET_KEY = Config.SECRET_KEY
+                token = jwt.encode({'id': user.id, 'isAdmin': user.isAdmin}, SECRET_KEY, algorithm='HS256')
 
                 return {
                     'statusCode': 200,

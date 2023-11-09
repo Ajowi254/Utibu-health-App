@@ -20,9 +20,6 @@ export const AdminProvider = ({ children }) => {
     const [user, setUser] = useState([]);
     const [order, setOrder] = useState([]);
 
-
-
-
     useEffect(() => {
         getBrand();
     }, []);
@@ -112,23 +109,22 @@ export const AdminProvider = ({ children }) => {
         }
     };
 
-    const deleteBrand = async (id) => {
-        try {
-            let value = await axios.delete(`${env.api}/brand/${id}`);
-            getBrand();
-            const { data } = value;
-            const { message, statusCode } = data;
-            if (statusCode === 200) {
-                toast.success(message);
-            } else {
-                toast.warn(message);
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-
+const deleteBrand = async (id) => {
+    try {
+      let value = await axios.delete(`${env.api}/brand/${id}`);
+      getBrand();
+      const { data } = value;
+      const { message, statusCode } = data;
+      if (statusCode === 200) {
+        toast.success(message);
+      } else {
+        toast.warn(message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
 
     const getCategory = async (query) => {
         try {
@@ -193,7 +189,6 @@ export const AdminProvider = ({ children }) => {
             console.log(error);
         }
     };
-
 
     // product
 

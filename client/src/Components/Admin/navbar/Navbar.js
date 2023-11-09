@@ -3,11 +3,11 @@ import './Navbar.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons'
 import AdminContext from '../../Context/adminContext';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 
 function Navbar() {
-  let navigate = useNavigate();
+  // let navigate = useNavigate();
   const context = useContext(AdminContext);
   const { open, setOpen } = context;
   const handleClick = () => setOpen(!open);
@@ -15,7 +15,7 @@ function Navbar() {
   return (
     <nav>
       <div className='nav_left'>
-        <h5>M Duka</h5>
+        <h5>My Duka</h5>
       </div>
       <h5>
         Admin

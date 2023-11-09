@@ -4,25 +4,25 @@ import { NavLink, useParams } from "react-router-dom";
 import AdminContext from "../../Context/adminContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faXmark,faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
+
 function EditCategory() {
-  const params = useParams();
+  const {id} = useParams();
   const { category, editCategory } = useContext(AdminContext);
-  let viewCategory = category.find((item) => item._id === params.id);
+  let viewCategory = category.find((item) => item.id === id);
 
   const formik = useFormik({
     initialValues: {
-      category: viewCategory.category,
+      category: viewCategory ? viewCategory.category : '',
     },
     validate: (values) => {
       const errors = {};
-
       if (values.category.length === 0) {
         errors.category = "Enter your Category";
       }
       return errors;
     },
-    onSubmit: async (values) => {
-      await editCategory(values, viewCategory._id);
+    onSubmit: (values) => {
+     editCategory(values, id);
     },
   });
 

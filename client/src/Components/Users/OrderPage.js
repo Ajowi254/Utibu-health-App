@@ -36,19 +36,15 @@ function OrderPage() {
         errors.customerName = "Enter Customer Name";
       }
       function validateMobile(mobilenumber) {
-        var regmm = "^([0|+[0-9]{1,5})?([7-9][0-9]{9})$";
-        var regmob = new RegExp(regmm);
         if (values.customerMobile.length === 0) {
-          return (errors.customerMobile = "Enter your mobile number");
+          errors.customerMobile = "Enter your phone number";
         }
-        if (regmob.test(mobilenumber)) {
-          return errors;
-        } else {
-          return (errors.customerMobile = "Please provide a valid mobile number");
-        }
+        return errors;
       }
+      
       validateMobile(values.customerMobile);
       return errors;
+      
     },
     onSubmit: async (values) => {
       toast.success("Customer Details Added")
@@ -85,7 +81,7 @@ function OrderPage() {
       return item.id === product_id;
     });
     if (!same) {
-      let pName = product.find((item) => item._id === product_id);
+      let pName = product.find((item) => item.id === product_id);
       let value = {
         id: pName._id,
         product: pName.product,
@@ -166,7 +162,7 @@ function OrderPage() {
   }
 
   const quantity = (id) => {
-    let data = product.find((item) => item._id === id);
+    let data = product.find((item) => item.id === id);
     setQuantitys(data);
   }
 
@@ -219,7 +215,7 @@ function OrderPage() {
                     <option selected value="Default">Select a product</option>
                     {
                       product.length > 0 && product.map((item, index) => {
-                        return <option key={index} value={item._id} >{item.product}</option>
+                        return <option key={index} value={item.id} >{item.product}</option>
                       })
                     }
                   </select>
