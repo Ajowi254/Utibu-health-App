@@ -4,7 +4,7 @@ import AdminContext from '../../Context/adminContext';
 import Search from '../../Search';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faPenToSquare,faTrash,faPlus ,faEye} from '@fortawesome/free-solid-svg-icons'
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function ViewProducts() {
