@@ -8,7 +8,7 @@ import {faXmark,faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
 function EditBrand() {
   const {id} = useParams();
   const { brand, editBrand } = useContext(AdminContext);
-let viewBrand = brand.find((item) => item.id === id);
+let viewBrand = brand.find((item) => item.id == id);
 
   const formik = useFormik({
     initialValues: {
@@ -22,10 +22,7 @@ let viewBrand = brand.find((item) => item.id === id);
       return errors;
     },
     onSubmit:  (values) => {
-      // console.log(values,'values')
-      // console.log(viewBrand.id, 'viewBrand')
-      // console.log(params.id, 'params')
-      
+    
      editBrand(values, id);
     },
   });
