@@ -4,6 +4,7 @@ import { NavLink, useParams } from "react-router-dom";
 import AdminContext from "../../Context/adminContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faXmark,faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
+
 function EditBrand() {
   const params = useParams();
   const { brand, editBrand } = useContext(AdminContext);
@@ -11,7 +12,7 @@ function EditBrand() {
 
   const formik = useFormik({
     initialValues: {
-      brand: viewBrand.brand,
+      brand: viewBrand ? viewBrand.brand : '',
     },
     validate: (values) => {
       const errors = {};
