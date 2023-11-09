@@ -17,7 +17,7 @@ def create_app():
     # Configure the Flask application
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.secret_key = 'your_secret_key_here'
+    app.secret_key = 'myduka'
 
     # Initialize the extensions
     db.init_app(app)
@@ -97,5 +97,4 @@ def create_app():
 
     return app
 if __name__ == '__main__':
-    app = create_app()
-    app.run(debug=True)
+    create_app().run(debug=True)

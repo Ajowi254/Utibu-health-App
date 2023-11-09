@@ -182,6 +182,7 @@ function Login() {
         const { data } = value;
         const { isAdmin, message, name, statusCode, token, user } = data;
         if (statusCode === 201) {
+        console.log(values);
 
           setloading(false)
           window.localStorage.setItem("token", token);
@@ -212,6 +213,10 @@ function Login() {
         }
 
         if (statusCode === 401) {
+          setloading(false)
+          toast.warn(message);
+        }
+        if (statusCode != 200) {
           setloading(false)
           toast.warn(message);
         }
