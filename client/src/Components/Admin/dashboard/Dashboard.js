@@ -1,4 +1,4 @@
-import React, { useContext,useEffect,useState } from "react";
+import React, { useContext,useState } from "react";
 import "./Dashboard.css";
 import Inventory from './inventory/Inventory';
 import DashItem from "./DashItem";
@@ -9,27 +9,27 @@ import BarChart from "./BarChart";
 function Dashboard() {
   const context = useContext(AdminContext);
   const [year,setYear] = useState(new Date().getFullYear())
-  const { dashboardOverview,getDashboardBarChart,dashboardBarChart } = context;
+  const { dashboardOverview,dashboardBarChart } = context;
 
   const data = [
     {
       title: "Total Products",
       value: dashboardOverview.totalProducts,
-      color: "rgb(255, 73, 209)",
+      color: "rgba(121, 229, 214, 0.812)",
       theam: "primary",
       icon: faPenToSquare,
     },
     {
       title: "Total Quantity Bought",
       value: dashboardOverview.bought,
-      color: "rgb(255, 73, 209)",
+      color: "rgba(121, 229, 214, 0.812)",
       theam: "success",
       icon: "fa-dollar-sign",
     },
     {
       title: "Sold",
       value: dashboardOverview.sold,
-      color: "rgb(255, 73, 209)",
+      color: "rgba(121, 229, 214, 0.812)",
       theam: "warning",
       icon: "fa-comments",
     },
@@ -37,14 +37,14 @@ function Dashboard() {
     {
       title: "Out Of Stock",
       value: dashboardOverview.outOfStock,
-      color: "rgb(255, 73, 209)",
+      color: "rgba(121, 229, 214, 0.812)",
       theam: "info",
       icon: "fa-clipboard-list"
     },
     {
       title: "Available Stock",
       value: dashboardOverview.totalAvaliableStock,
-      color: "rgb(255, 73, 209)",
+      color: "rgba(121, 229, 214, 0.812)",
       theam: "warning",
       icon: "fa-comments",
     },
@@ -52,13 +52,13 @@ function Dashboard() {
   ];
 
 
-  useEffect(()=>{
-    getDashboardBarChart(year)
-  },[year])
+  // useEffect(()=>{
+  //   getDashboardBarChart(year)
+  // },[year])
 
-  useEffect(()=>{
-    getDashboardBarChart(2022)
-  },[])
+  // useEffect(()=>{
+  //   getDashboardBarChart(2022)
+  // },[])
 
   const yearz = (new Date()).getFullYear();
   const years = Array.from(new Array(10),( val, index) => yearz - index );

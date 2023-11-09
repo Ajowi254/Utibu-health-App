@@ -1,4 +1,3 @@
-//register.js
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import axios from "axios";
@@ -28,18 +27,16 @@ function Register() {
       }
       if (values.email.length === 0) {
         errors.email = "Enter your email address";
-      } else if (values.email.search(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/)) {
+      } else if (!/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(values.email)) {
         errors.email = "Please provide a valid email address";
       }
 
       function validateMobile(mobilenumber) {
-        // var mob_regex = /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$/;
-        var regmm = "^([0|+[0-9]{1,5})?([7-9][0-9]{9})$";
-        var regmob = new RegExp(regmm);
+        var regmm = /^([0-9]{10})$/; 
         if (values.mobile.length === 0) {
           return (errors.mobile = "Enter your mobile number");
         }
-        if (regmob.test(mobilenumber)) {
+        if (regmm.test(mobilenumber)) {
           return errors;
         } else {
           return (errors.mobile = "Please provide a valid mobile number");
@@ -49,18 +46,18 @@ function Register() {
       validateMobile(values.mobile);
 
       if (values.password.length === 0) {
-        errors.password = "Enter your passowrd";
-      } else if (values.password.search(/[a-z]/i) < 0) {
+        errors.password = "Enter your password";
+      } else if (!/[a-z]/i.test(values.password)) {
         errors.password = "Your password must contain at least one letter";
-      } else if (values.password.search(/[0-9]/) < 0) {
+      } else if (!/\d/.test(values.password)) {
         errors.password = "Your password must contain at least one digit";
       } else if (values.password.length < 8) {
         errors.password = "Your password must be at least 8 characters";
       }
       if (values.conformPassword !== values.password) {
-        errors.conformPassword = "Conform password does not match";
+        errors.conformPassword = "Confirm password does not match";
       } else if (values.conformPassword.length === 0) {
-        errors.conformPassword = "Enter your conform password";
+        errors.conformPassword = "Enter your confirm password";
       }
       return errors;
     },
@@ -68,18 +65,18 @@ function Register() {
     onSubmit: async (values) => {
       try {
         delete values.conformPassword;
-        setloading(true)
-        let user = await axios.post(`${env.api}/user/register`, values);
+        setloading(true);
+        let user = await axios.post(`${env.api}/register`, values); 
         const { data } = user;
         const { message, statusCode } = data;
         if (statusCode === 201) {
-          setloading(false)
+          setloading(false);
           toast.success(message);
           setTimeout(() => {
-            navigate("/");
+            navigate("/"); 
           }, 700);
-        }else{
-          setloading(false)
+        } else {
+          setloading(false);
           toast.warn(message);
         }
       } catch (error) {
@@ -93,9 +90,7 @@ function Register() {
       <div className="containers">
         <form
           className="form"
-          onSubmit={(values) => {
-            formik.handleSubmit(values);
-          }}
+          onSubmit={formik.handleSubmit}
         >
           <h4 className="text-center mb-4">Register Form</h4>
           <div className="mb-3">
@@ -149,7 +144,7 @@ function Register() {
             <input
               type="password"
               className="form-control shadow-none"
-              placeholder="Enter you Password "
+              placeholder="Enter your Password"
               value={formik.values.password}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -160,11 +155,11 @@ function Register() {
             ) : null}
           </div>
           <div className="mb-3">
-            <label className="form-label ">Conform Password</label>
+            <label className="form-label">Confirm Password</label>
             <input
               type="password"
               className="form-control shadow-none"
-              placeholder="Enter you Conform Password"
+              placeholder="Enter your Confirm Password"
               value={formik.values.conformPassword}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -175,13 +170,13 @@ function Register() {
             ) : null}
           </div>
           <button type="submit" className="btns btn" disabled={!formik.isValid}>
-                {loading ? (
+            {loading ? (
               <img
                 src={load}
                 alt="load"
                 className="spinner"
               />
-            ) : " SignUp "}
+            ) : "Sign Up"}
           </button>
           <div className="mt-3 new_user">
             <span>

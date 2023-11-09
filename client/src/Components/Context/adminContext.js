@@ -1,4 +1,3 @@
-//AdminContext.js
 import axios from "axios";
 import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -6,22 +5,20 @@ import { env } from "../../config";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-//
-const AdminContext = createContext();
+let AdminContext = createContext();
 
 export const AdminProvider = ({ children }) => {
-    const navigate = useNavigate();
-    const [admin, setAdmin] = useState(null);
+    let navigate = useNavigate();
+    const [username, setUsername] = useState("user");
+    const [open, setOpen] = useState(false);
     const [brand, setBrand] = useState([]);
     const [category, setCategory] = useState([]);
     const [products, setProducts] = useState([]);
     const [dashboardProduct, setDashboardProduct] = useState([]);
-    const [dashboardOverview, setDashboardOverview] = useState(null);
-    const [dashboardBarChart, setDashboardBarChart] = useState(null);
-    const [user, setUser] = useState(null);
+    const [dashboardOverview, setDashboardOverview] = useState({});
+    const [dashboardBarChart, setDashboardBarChart] = useState([])
+    const [user, setUser] = useState([]);
     const [order, setOrder] = useState([]);
-
-  const API_URL = "http://localhost:5000";
 
     useEffect(() => {
         getBrand();
@@ -29,10 +26,6 @@ export const AdminProvider = ({ children }) => {
 
     useEffect(() => {
         getCategory()
-    }, []);
-
-    useEffect(() => {
-        checkSession()
     }, []);
 
     useEffect(() => {
@@ -56,6 +49,7 @@ export const AdminProvider = ({ children }) => {
         getDashboardOverview()
     }, [products]);
 
+
     useEffect(() => {
         getDashboardBarChart(new Date().getFullYear())
     }, []);
@@ -64,62 +58,18 @@ export const AdminProvider = ({ children }) => {
         getUser()
     }, []);
 
+
     useEffect(() => {
         getOrder()
     }, []);
-
-    const checkSession = async () => {
-        try {
-          const response = await axios.get(`${API_URL}/check-session`);
-          if (response.data.isAdmin) {
-            setAdmin(response.data);
-            navigate("/admin-dashboard");
-          } else if (response.data.user) {
-            setUser(response.data);
-            navigate("/user-dashboard");
-          } else {
-            navigate("/login");
-          }
-        } catch (error) {
-          console.error(error);
-          navigate("/login");
-        }
-      };
-      const login = async (credentials) => {
-        try {
-          const response = await axios.post(`${API_URL}/login`, credentials);
-          if (response.data.isAdmin) {
-            setAdmin(response.data);
-            navigate("/admin-dashboard");
-          } else {
-            setUser(response.data);
-            navigate("/user-dashboard");
-          }
-        } catch (error) {
-          console.error(error);
-          toast.error("Invalid credentials. Please try again.");
-        }
-      };
-      
-      const logout = async () => {
-        try {
-          await axios.post(`${API_URL}/logout`);
-          setUser(null);
-          setAdmin(null);
-          navigate("/login");
-        } catch (error) {
-          console.error(error);
-        }
-      };
-      
 
     const getBrand = async (query) => {
         try {
             let value;
             if (!query) {
-                value = await axios.get(`${env.api}/inventory/brand`);
+                value = await axios.get(`${env.api}/brands`);
             } else {
-                value = await axios.get(`${env.api}/inventory/brand?q=${query}`);
+                value = await axios.get(`${env.api}/brand?q=${query}`);
             }
             setBrand(value.data.data);
         } catch (error) {
@@ -129,7 +79,7 @@ export const AdminProvider = ({ children }) => {
 
     const addBrand = async (values) => {
         try {
-            let user = await axios.post(`${env.api}/inventory/Add-brand`, values);
+            let user = await axios.post(`${env.api}/brand`, values);
             getBrand();
             const { data } = user;
             const { message, statusCode } = data;
@@ -145,7 +95,7 @@ export const AdminProvider = ({ children }) => {
 
     const editBrand = async (values, id) => {
         try {
-            let value = await axios.put(`${env.api}/inventory/edit-brand/${id}`, values);
+            let value = await axios.put(`${env.api}/brand/${id}`, values);
             getBrand();
             const { data } = value;
             const { message, statusCode } = data;
@@ -159,31 +109,30 @@ export const AdminProvider = ({ children }) => {
         }
     };
 
-    const deleteBrand = async (id) => {
-        try {
-            let value = await axios.delete(`${env.api}/inventory/delete-brand/${id}`);
-            getBrand();
-            const { data } = value;
-            const { message, statusCode } = data;
-            if (statusCode === 200) {
-                toast.success(message);
-            } else {
-                toast.warn(message);
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-
+const deleteBrand = async (id) => {
+    try {
+      let value = await axios.delete(`${env.api}/brand/${id}`);
+      getBrand();
+      const { data } = value;
+      const { message, statusCode } = data;
+      if (statusCode === 200) {
+        toast.success(message);
+      } else {
+        toast.warn(message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
 
     const getCategory = async (query) => {
         try {
             let value;
             if (!query) {
-                value = await axios.get(`${env.api}/inventory/category`);
+                value = await axios.get(`${env.api}/category`);
             } else {
-                value = await axios.get(`${env.api}/inventory/category?q=${query}`);
+                value = await axios.get(`${env.api}/category?q=${query}`);
             }
             setCategory(value.data.data);
 
@@ -195,7 +144,7 @@ export const AdminProvider = ({ children }) => {
 
     const addCategory = async (values) => {
         try {
-            let user = await axios.post(`${env.api}/inventory/add-category`, values);
+            let user = await axios.post(`${env.api}/addCategory`, values);
             getCategory()
             const { data } = user;
             const { message, statusCode } = data;
@@ -211,7 +160,7 @@ export const AdminProvider = ({ children }) => {
 
     const editCategory = async (values, id) => {
         try {
-            let value = await axios.put(`${env.api}/inventory/edit-category/${id}`, values);
+            let value = await axios.put(`${env.api}/category/${id}`, values);
             getCategory()
             const { data } = value;
             const { message, statusCode } = data;
@@ -227,7 +176,7 @@ export const AdminProvider = ({ children }) => {
 
     const deleteCategory = async (id) => {
         try {
-            let value = await axios.delete(`${env.api}/inventory/delete-category/${id}`);
+            let value = await axios.delete(`${env.api}/category/${id}`);
             getCategory();
             const { data } = value;
             const { message, statusCode } = data;
@@ -241,16 +190,15 @@ export const AdminProvider = ({ children }) => {
         }
     };
 
-
     // product
 
     const getproducts = async (query) => {
         try {
             let value;
             if (!query) {
-                value = await axios.get(`${env.api}/inventory/products`);
+                value = await axios.get(`${env.api}/product`);
             } else {
-                value = await axios.get(`${env.api}/inventory/products?q=${query}`);
+                value = await axios.get(`${env.api}/products?q=${query}`);
             }
             setProducts(value.data.data);
 
@@ -262,7 +210,7 @@ export const AdminProvider = ({ children }) => {
 
     const addProduct = async (values) => {
         try {
-            let user = await axios.post(`${env.api}/inventory/add-product`, values);
+            let user = await axios.post(`${env.api}/addProduct`, values);
             const { data } = user;
             const { message, statusCode } = data;
             if (statusCode === 201) {
@@ -280,7 +228,7 @@ export const AdminProvider = ({ children }) => {
 
     const editProduct = async (values, id) => {
         try {
-            let value = await axios.put(`${env.api}/inventory/edit-product/${id}`, values);
+            let value = await axios.put(`${env.api}/product/${id}`, values);
             const { data } = value;
             const { message, statusCode } = data;
             if (statusCode === 200) {
@@ -296,7 +244,7 @@ export const AdminProvider = ({ children }) => {
 
     const deleteProduct = async (id) => {
         try {
-            let value = await axios.delete(`${env.api}/inventory/delete-product/${id}`);
+            let value = await axios.delete(`${env.api}/product/${id}`);
             const { data } = value;
             const { message, statusCode } = data;
             if (statusCode === 200) {
@@ -316,9 +264,9 @@ export const AdminProvider = ({ children }) => {
         try {
             let value;
             if (!query) {
-                value = await axios.get(`${env.api}/inventory/dashboard-products`);
+                value = await axios.get(`${env.api}/dashboardproduct`);
             } else {
-                value = await axios.get(`${env.api}/inventory/dashboard-products?q=${query}`);
+                value = await axios.get(`${env.api}/dashboardproduct?q=${query}`);
             }
             const { data } = value;
             setDashboardProduct(data.products);
@@ -329,7 +277,7 @@ export const AdminProvider = ({ children }) => {
 
     const getDashboardOverview = async () => {
         try {
-            let value = await axios.get(`${env.api}/inventory/dashboard-overview`);
+            let value = await axios.get(`${env.api}/dashboardoverview`);
             const { data } = value;
             setDashboardOverview(data);
         } catch (error) {
@@ -341,7 +289,7 @@ export const AdminProvider = ({ children }) => {
         try {
             console.log(query);
            
-                let value = await axios.get(`${env.api}/inventory/dashboard-barChart/${query}`);
+                let value = await axios.get(`${env.api}/dashboardbarchart/${query}`);
            
             const { data } = value;
             setDashboardBarChart(data);
@@ -353,7 +301,7 @@ export const AdminProvider = ({ children }) => {
 
     const getUser = async () => {
         try {
-            let value = await axios.get(`${env.api}/user/user-details`);
+            let value = await axios.get(`${env.api}/users`);
             const { data } = value;
             setUser(data.data)
         } catch (error) {
@@ -361,9 +309,9 @@ export const AdminProvider = ({ children }) => {
         }
     };
 
-    const getOrder = async () => {
+    const getOrder = async (id) => {
         try {
-            let value = await axios.get(`${env.api}/orders/view-order`);
+            let value = await axios.get(`${env.api}/order/${id}`);
             const { data } = value;
             setOrder(data.data);
         } catch (error) {
@@ -372,10 +320,9 @@ export const AdminProvider = ({ children }) => {
     };
     return (
         <AdminContext.Provider value={{
-            admin, setAdmin, brand, getBrand, addBrand, editBrand, deleteBrand, category, addCategory, editCategory, deleteCategory,
+            username, setUsername, brand, open, setOpen, getBrand, addBrand, editBrand, deleteBrand, category, addCategory, editCategory, deleteCategory,
             products, getproducts, addProduct, editProduct, deleteProduct, dashboardProduct, dashboardOverview, getCategory, user, getUser, order,
-            getDashboardProduct, getDashboardOverview,checkSession, dashboardBarChart, getDashboardBarChart, getOrder, login,
-            logout
+            getDashboardProduct, getDashboardOverview, dashboardBarChart, getDashboardBarChart, getOrder
         }}>
             {children}
         </AdminContext.Provider>
@@ -383,4 +330,3 @@ export const AdminProvider = ({ children }) => {
 };
 
 export default AdminContext;
-

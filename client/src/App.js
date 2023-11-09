@@ -35,7 +35,7 @@ import YourOrder from "./Components/Users/YourOrder";
 
 function App() {
  
-  let user = window.localStorage.getItem("name");
+  // let user = window.localStorage.getItem("name");
   return (
     <div>
       <AdminProvider>
@@ -43,7 +43,7 @@ function App() {
           <Routes>
       
 
-            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route
@@ -96,4 +96,5 @@ function App() {
     </div>
   );
 }
+
 export default App;

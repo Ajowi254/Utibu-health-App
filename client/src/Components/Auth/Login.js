@@ -1,4 +1,3 @@
-//login.js
 import React, { useState, useContext } from "react";
 import "./Login.css";
 import { useFormik } from "formik";
@@ -25,7 +24,7 @@ function Login() {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  //const handleShow = () => setShow(true);
 
 
   const formik = useFormik({
@@ -35,37 +34,37 @@ function Login() {
     },
     validate: (values) => {
       const errors = {};
-
+    
       if (values.email.length === 0) {
         errors.email = "Enter your email address";
-      } else if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(values.email))
-      {
+      } else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(values.email)) {
         errors.email = "Please provide a valid email address";
       }
       if (values.password.length === 0) {
         errors.password = "Enter your password";
       }
-
+    
       return errors;
     },
 
     onSubmit: async (values) => {
       try {
         setloading(true)
-        let value = await axios.post(`${env.api}/user/login`, values);
+        let value = await axios.post(`${env.api}/login`, values);
         const { data } = value;
         const { isAdmin, message, name, statusCode, token, user } = data;
-        if (statusCode === 201) {
+        if (statusCode === 200) {
+        console.log(values);
 
-          //setloading(false)
-          //window.localStorage.setItem("token", token);
-          //window.localStorage.setItem("name", name);
-          //window.localStorage.setItem("isAdmin", isAdmin);
-          //window.localStorage.setItem("userId", user._id);
-          //toast.success(message);
+          setloading(false)
+          window.sessionStorage.setItem("token", token);
+          window.sessionStorage.setItem("name", name);
+          window.sessionStorage.setItem("isAdmin", isAdmin);
+          window.sessionStorage.setItem("userId", user._id);
+          toast.success(message);
 
           setTimeout(() => {
-            if (isAdmin === "admin") {
+            if (isAdmin) {
               getOrder()
               getUser()
               getDashboardProduct()
@@ -73,19 +72,21 @@ function Login() {
               getDashboardBarChart(new Date().getFullYear())
               navigate("/home");
             }
-            else if (isAdmin === "user") {
+            else {
               setUsername(name)
               productData()
               navigate("/user-portal")
-            } else {
-              handleShow()
 
-            }
-
+            } 
+          
           },350);
         }
 
         if (statusCode === 401) {
+          setloading(false)
+          toast.warn(message);
+        }
+        if (statusCode !== 200) {
           setloading(false)
           toast.warn(message);
         }
@@ -168,18 +169,6 @@ function Login() {
           </div>
         </form>
         <ToastContainer />
-      </div>
-   
-      <div className='mt-5  a card text-center text-dark fw-bold bg-transparent '>
-       
-       <span className="text-uppercase">credentials for Admin : - </span>
-        <span>Email : kirubam8878@gmail.com</span>
-        <sapn>Password : Admin@1234</sapn>
-        <span className="text-uppercase">credentials for User : -</span>
-        <span>Email : kirubaharan8878m@gmail.com</span>
-        <sapn>Password : User@1234</sapn>
-     
-      
       </div>
       <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Header closeButton>

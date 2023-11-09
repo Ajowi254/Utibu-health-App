@@ -35,16 +35,16 @@ function Razorpay() {
       key_secret: "0wVxMg5kGzT0eJyDdjR9FLdi",
       amount: parseInt(Total) * 100,
       currency: "INR",
-      name: "Retail Shop App",
+      name: "My Duka App",
       description: "for testing purpose",
       handler: function (response) {
 
         send(response.razorpay_payment_id)
       },
       prefill: {
-        name: "Kirubaharan m",
-        email: "kirubaharan8878m@gmail.com",
-        contact: "8489671064"
+        name: "",
+        email: "",
+        contact: ""
       },
       notes: {
         address: "Razorpay Corporate office"

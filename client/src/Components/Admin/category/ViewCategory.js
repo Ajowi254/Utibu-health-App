@@ -1,25 +1,30 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import AdminContext from '../../Context/adminContext';
 import Search from '../../Search';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faPenToSquare,faTrash,faPlus } from '@fortawesome/free-solid-svg-icons'
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function ViewCategory() {
 
   let navigate = useNavigate();
   const context = useContext(AdminContext);
-  const { category, deleteCategory, getCategory } = context
+  const { category, deleteCategory, getCategory,currentPage} = context;
+
   const handleEdit = (id) => {
-    navigate(`/home/category/edit-category/${id}`)
-  }
+    navigate(`/home/category/edit-category/${id}`);
+  };
+  
   const handledelete = async (id) => {
     console.log(id);
     await deleteCategory(id)
-  }
-  return (
+  };
+  useEffect(() => {
+    getCategory();
+}, [currentPage, getCategory]);
+return (
     <div>
       <div className="comman_header">Home/Category</div>
       <div className="d-flex justify-content-end me-2">
@@ -55,12 +60,12 @@ function ViewCategory() {
                     <td>{item.category}</td>
                     <td>
                       <button type="button" className="btn btn-success" onClick={() => {
-                        handleEdit(item._id)
+                        handleEdit(item.id)
                       }}>
                         <span className='cz' ><FontAwesomeIcon icon={ faPenToSquare}/></span> Edit
                       </button>
                       <button type="button" className="btn btn-secondary ms-2" onClick={() => {
-                        handledelete(item._id)
+                        handledelete(item.id)
                       }}>
                        <span className='cz' ><FontAwesomeIcon icon={ faTrash}/></span>  Delete
                       </button>
