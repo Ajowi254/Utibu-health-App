@@ -17,14 +17,15 @@ function ViewBrand() {
       navigate(`/home/brand/edit-brand/${id}`);
   };
 
-  const handledelete = async (id) => {
-      await deleteBrand(id);
+  const handledelete =  (id) => {
+    console.log(id, "id")
+      deleteBrand(id);
   };
 
   useEffect(() => {
     getBrand(null, currentPage);
 }, [currentPage]);
-
+// console.log({brand})
   return (
       <div>
           <div className="comman_header">Home/Brand</div>
@@ -60,10 +61,10 @@ function ViewBrand() {
                                           <td>{index + 1}</td>
                                           <td>{item.brand}</td>
                                           <td>
-                                              <button type="button" className="btn btn-success" onClick={() => handleEdit(item._id)}>
+                                              <button type="button" className="btn btn-success" onClick={() => handleEdit(item.id)}>
                                                   <span className='cz'><FontAwesomeIcon icon={faPenToSquare} /></span> Edit
                                               </button>
-                                              <button type="button" className="btn btn-secondary ms-2" onClick={() => handledelete(item._id)}>
+                                              <button type="button" className="btn btn-secondary ms-2" onClick={() => handledelete(item.id)}>
                                                   <span className='cz'><FontAwesomeIcon icon={faTrash} /></span> Delete
                                               </button>
                                           </td>

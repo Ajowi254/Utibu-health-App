@@ -6,10 +6,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faXmark,faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
 
 function EditProducts() {
-  const params = useParams();
+  const {id}= useParams();
   const context = useContext(AdminContext);
   const { products, editProduct, brand, category } = context
-  let viewProducts = products.find((item) => item._id === params.id);
+  let viewProducts = products.find((item) => item.id == id);
 
   const formik = useFormik({
     initialValues: {
@@ -43,9 +43,9 @@ function EditProducts() {
       return errors;
     },
 
-    onSubmit: async (values) => {
+    onSubmit: (values) => {
       // values.availableInStock = values.quantity;
-      await editProduct(values, viewProducts._id);
+      editProduct(values,id);
     },
   });
   let image = viewProducts.productImage;

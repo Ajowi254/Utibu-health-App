@@ -81,7 +81,7 @@ function OrderPage() {
       return item.id === product_id;
     });
     if (!same) {
-      let pName = product.find((item) => item._id === product_id);
+      let pName = product.find((item) => item.id === product_id);
       let value = {
         id: pName._id,
         product: pName.product,
@@ -162,7 +162,7 @@ function OrderPage() {
   }
 
   const quantity = (id) => {
-    let data = product.find((item) => item._id === id);
+    let data = product.find((item) => item.id === id);
     setQuantitys(data);
   }
 
@@ -215,7 +215,7 @@ function OrderPage() {
                     <option selected value="Default">Select a product</option>
                     {
                       product.length > 0 && product.map((item, index) => {
-                        return <option key={index} value={item._id} >{item.product}</option>
+                        return <option key={index} value={item.id} >{item.product}</option>
                       })
                     }
                   </select>
