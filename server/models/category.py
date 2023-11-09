@@ -1,7 +1,7 @@
 # category.py
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
-from app import db
+from models.dbconfig import db
 
 class CategoryDetails(db.Model):
     __tablename__ = 'category_details'
