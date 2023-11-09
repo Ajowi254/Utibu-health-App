@@ -24,7 +24,7 @@ function Login() {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  //const handleShow = () => setShow(true);
 
 
   const formik = useFormik({
@@ -86,7 +86,7 @@ function Login() {
           setloading(false)
           toast.warn(message);
         }
-        if (statusCode != 200) {
+        if (statusCode !== 200) {
           setloading(false)
           toast.warn(message);
         }

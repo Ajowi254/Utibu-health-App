@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext} from 'react';
 import "./Brand.css";
 import { NavLink, useNavigate } from 'react-router-dom';
 import AdminContext from '../../Context/adminContext';
@@ -22,9 +22,9 @@ function ViewBrand() {
       deleteBrand(id);
   };
 
-  useEffect(() => {
-    getBrand(null, currentPage);
-}, [currentPage]);
+//   useEffect(() => {
+//     getBrand(null, currentPage);
+// }, [currentPage]);
 // console.log({brand})
   return (
       <div>

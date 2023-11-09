@@ -8,7 +8,7 @@ import {faXmark,faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
 function EditBrand() {
   const {id} = useParams();
   const { brand, editBrand } = useContext(AdminContext);
-let viewBrand = brand.find((item) => item.id == id);
+let viewBrand = brand.find((item) => item.id === id);
 
   const formik = useFormik({
     initialValues: {

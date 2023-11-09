@@ -1,4 +1,4 @@
-import React, { useContext,useEffect,useState } from "react";
+import React, { useContext,useState } from "react";
 import "./Dashboard.css";
 import Inventory from './inventory/Inventory';
 import DashItem from "./DashItem";
@@ -9,7 +9,7 @@ import BarChart from "./BarChart";
 function Dashboard() {
   const context = useContext(AdminContext);
   const [year,setYear] = useState(new Date().getFullYear())
-  const { dashboardOverview,getDashboardBarChart,dashboardBarChart } = context;
+  const { dashboardOverview,dashboardBarChart } = context;
 
   const data = [
     {
@@ -52,13 +52,13 @@ function Dashboard() {
   ];
 
 
-  useEffect(()=>{
-    getDashboardBarChart(year)
-  },[year])
+  // useEffect(()=>{
+  //   getDashboardBarChart(year)
+  // },[year])
 
-  useEffect(()=>{
-    getDashboardBarChart(2022)
-  },[])
+  // useEffect(()=>{
+  //   getDashboardBarChart(2022)
+  // },[])
 
   const yearz = (new Date()).getFullYear();
   const years = Array.from(new Array(10),( val, index) => yearz - index );
