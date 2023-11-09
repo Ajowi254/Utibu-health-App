@@ -36,19 +36,15 @@ function OrderPage() {
         errors.customerName = "Enter Customer Name";
       }
       function validateMobile(mobilenumber) {
-        var regmm = "^([0|+[0-9]{1,5})?([7-9][0-9]{9})$";
-        var regmob = new RegExp(regmm);
         if (values.customerMobile.length === 0) {
-          return (errors.customerMobile = "Enter your mobile number");
+          errors.customerMobile = "Enter your phone number";
         }
-        if (regmob.test(mobilenumber)) {
-          return errors;
-        } else {
-          return (errors.customerMobile = "Please provide a valid mobile number");
-        }
+        return errors;
       }
+      
       validateMobile(values.customerMobile);
       return errors;
+      
     },
     onSubmit: async (values) => {
       toast.success("Customer Details Added")
