@@ -1,9 +1,0 @@
-services:
-  - name: backend
-    type: web
-    buildCommand: pip install -r requirements.txt
-    startCommand: python app.py
-    envVars:
-      - key: RENDER_ENVIRONMENT
-        value: production
-    env: python
