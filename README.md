@@ -11,9 +11,12 @@ navigate to server
 npm install
 generate the db 
 in case of owner of repo the db is already generated and is located at instance
-but if another party is accessing this app they have to delete the migrations and instance folders and generate own db .process includes, pip install flask
+but if another party is accessing this app they have to delete the migrations and instance folders and generate own db .process includes,pip install flask-migrate
+
 Navigate to the directory where your app.py file is located using the cd command.
 type flask db init and press Enter. This will create a new migration repository.
+flask db migrate -m "Initial migration."
+
  type flask db upgrade and press Enter. This will apply the migration to the database
  python seed.py to seed data
  python app.py you should be redirected to port 5000 
