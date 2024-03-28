@@ -89,7 +89,7 @@ function ForgotPasswordPage() {
           ) : null}
         </div>
         <div className="mb-3">
-          <label className="form-label ">Conform Password</label>
+          <label className="form-label ">Confirm Password</label>
           <input
             type="password"
             className="form-control shadow-none"

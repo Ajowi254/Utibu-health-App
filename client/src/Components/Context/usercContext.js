@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { env } from "../../config";
 
+
 let UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
@@ -24,9 +25,10 @@ export const UserProvider = ({ children }) => {
     try {
       let value;
       value = await axios.get(`${env.api}/product`);
+      console.log('Product data:', value.data);
       setProduct(value.data.data);
     } catch (error) {
-      console.log(error);
+      console.error('Error fetching product data:', error); 
     }
   };
   const setOrderz = async (data) => {

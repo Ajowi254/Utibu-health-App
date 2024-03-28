@@ -35,7 +35,7 @@ function Razorpay() {
       key_secret: "0wVxMg5kGzT0eJyDdjR9FLdi",
       amount: parseInt(Total) * 100,
       currency: "INR",
-      name: "My Duka App",
+      name: " Utibu Health App",
       description: "for testing purpose",
       handler: function (response) {
 
@@ -76,7 +76,7 @@ function Razorpay() {
           <h2>CVV :  123</h2>
           <h2>OTP Number : 1111</h2>
         </div>
-        <button type="button" onClick={handleSubmit} className="btn btn-success mt-5 me-5">Conform To Place your Order</button>
+        <button type="button" onClick={handleSubmit} className="btn btn-success mt-5 me-5">Use These Details To Place your Order</button>
       </div>
     </div>
   )

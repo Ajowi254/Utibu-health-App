@@ -245,7 +245,7 @@ function ProfilePage() {
             {formik1.touched.newPassword && formik1.errors.newPassword ? (<div className="error"> {formik1.errors.newPassword}</div>) : null}
           </div>
           <div className="form-group">
-            <label for="exampleInputEmail1">Conform Password</label>
+            <label for="exampleInputEmail1">Confirm Password</label>
             <input type="password" className="form-control shadow-none" id="exampleInputEmail1" placeholder='Enter Your Conform Password'
               value={formik1.values.conformPassword}
               onChange={formik1.handleChange}

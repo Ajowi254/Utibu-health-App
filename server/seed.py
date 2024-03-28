@@ -1,5 +1,4 @@
 #seed.py
-# from app import app, db
 from werkzeug.security import generate_password_hash
 from app import create_app, db
 from models.userModel import UserDetails
@@ -8,8 +7,6 @@ from models.category import CategoryDetails
 from models.brand import BrandDetails
 from models.product import ProductDetails
 from datetime import datetime
-
-
 
 created_at_string = '2023-10-30 18:53:11.151699'
 created_at = datetime.strptime(created_at_string, '%Y-%m-%d %H:%M:%S.%f')
@@ -80,8 +77,6 @@ def seed_database():
     category8 = CategoryDetails(category="Computer")
     category9 = CategoryDetails(category="laptop")
     category10 = CategoryDetails(category="laptop")
-
-
 
     customer_data = {
         'user_id': 2,

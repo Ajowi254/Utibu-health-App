@@ -7,7 +7,6 @@ from flask_cors import CORS
 from models.dbconfig import db
 from config import Config
 
-
 def create_app(config_class=Config):
     # Create the Flask application
     app = Flask(__name__)
@@ -17,7 +16,6 @@ def create_app(config_class=Config):
     
     # Configure the Flask application
     app.config.from_object(config_class)
-
 
     # Initialize the extensions
     db.init_app(app)
@@ -32,7 +30,7 @@ def create_app(config_class=Config):
 
     @app.route('/')
     def home():
-     return "Welcome to My Duka App!"
+     return "Welcome to Utibu Health App!"
 
     # Import your resources here
     from controllers.admin.brand.add_brand import add_brand
@@ -60,6 +58,7 @@ def create_app(config_class=Config):
     from controllers.user.order.profileUpdate.profile_update import profile_update
     from controllers.user.order.invoice import invoice
     from controllers.user.order.your_order import your_order
+    from controllers.user.order.product_resource import ProductResource
     from controllers.admin.dashboard.dashboard_overview import dashboard_overview
     from controllers.admin.dashboard.bar_chart import bar_chart
     from controllers.admin.dashboard.dashboard_product import dashboard_product
@@ -94,6 +93,7 @@ def create_app(config_class=Config):
     api.add_resource(bar_chart, '/dashboardbarchart')###
     api.add_resource(dashboard_product, '/dashboardproduct')#
     api.add_resource(Logout, '/logout')#
+    api.add_resource(ProductResource, '/api/product/<int:id>')
 
     return app
 if __name__ == '__main__':
