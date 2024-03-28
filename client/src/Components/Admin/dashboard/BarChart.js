@@ -1,4 +1,4 @@
-import React, { useState,useContext, useEffect } from 'react';
+import React, {useContext} from 'react';
 import AdminContext from "../../Context/adminContext";
 import {
   Chart as ChartJS,
@@ -56,7 +56,7 @@ ChartJS.register(
 
  function BarChart() {
   const context = useContext(AdminContext);
-const { getDashboardBarChart,dashboardBarChart } = context;
+const {dashboardBarChart } = context;
 
 
 const { month } = dashboardBarChart

@@ -4,14 +4,14 @@ import AdminContext from '../../Context/adminContext';
 import Search from '../../Search';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faPenToSquare,faTrash,faPlus } from '@fortawesome/free-solid-svg-icons'
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function ViewCategory() {
 
   let navigate = useNavigate();
   const context = useContext(AdminContext);
-  const { category, deleteCategory, getCategory,currentPage, setCurrentPage, totalPages } = context;
+  const { category, deleteCategory, getCategory,currentPage} = context;
 
   const handleEdit = (id) => {
     navigate(`/home/category/edit-category/${id}`);
@@ -23,9 +23,8 @@ function ViewCategory() {
   };
   useEffect(() => {
     getCategory();
-}, [currentPage]);
-
-  return (
+}, [currentPage, getCategory]);
+return (
     <div>
       <div className="comman_header">Home/Category</div>
       <div className="d-flex justify-content-end me-2">

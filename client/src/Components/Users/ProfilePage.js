@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import './ProfilePage.css'
 import { useFormik } from 'formik';
 import UserContext from '../Context/usercContext';
@@ -14,9 +14,9 @@ function ProfilePage() {
   const { setUsername } = context
   const [pic, setPic] = useState("");
 
-  useEffect(() => {
-    profileDetails()
-  }, [])
+  // useEffect(() => {
+  //   profileDetails()
+  // }, [])
 
   let image = pic;
   let img = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWkSWLRxX42sG_oDs7OlqF2x2Vs88aEBqyWA&usqp=CAU";
@@ -26,7 +26,7 @@ function ProfilePage() {
   const profileDetails = async () => {
     try {
       let x = window.localStorage.getItem("userId")
-      let value = await axios.get(`${env.api}/user/profileDetail/${x}`);
+      let value = await axios.get(`${env.api}/profile${x}`);
       formik.setValues({
         name: value.data.data.name,
         email: value.data.data.email,

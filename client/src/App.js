@@ -35,7 +35,7 @@ import YourOrder from "./Components/Users/YourOrder";
 
 function App() {
  
-  let user = window.localStorage.getItem("name");
+  // let user = window.localStorage.getItem("name");
   return (
     <div>
       <AdminProvider>

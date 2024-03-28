@@ -8,7 +8,7 @@ function OneViewproduct() {
   const {id} = useParams();
   const context = useContext(AdminContext);
   const { products } = context
-  let viewProducts = products?.find((item) => item.id== id);
+  let viewProducts = products?.find((item) => item && item.id === parseInt(id));
 
   let image = viewProducts?.productImage;
   let img = "https://st2.depositphotos.com/1561359/12101/v/950/depositphotos_121012076-stock-illustration-blank-photo-icon.jpg"
